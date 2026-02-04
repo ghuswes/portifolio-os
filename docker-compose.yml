@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    # Mapeia a porta 5173 do container para o seu computador
+    ports:
+      - "5173:5173"
+    # Sincroniza os arquivos: o que você edita fora, muda dentro
+    volumes:
+      - .:/app
+      - /app/node_modules # Evita conflitos de módulos entre Windows/Linux
+    # Variáveis de ambiente
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Ajuda o hot-reload no Windows/Docker

@@ -1,0 +1,67 @@
+/* src/styles/DesktopIcon.scss */
+
+.desktop-icon {
+  background: none;
+  border: none;
+  cursor: pointer; /* Ou 'default' se quiser mais estilo OS antigo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px; /* Reduzi um pouco para o label ficar perto */
+  width: 85px; /* Definindo uma largura para a área de clique ficar consistente */
+  // background-color: rgba(255, 0, 0, 0.3);
+  
+  /* --- LABEL (TEXTO) --- */
+  .icon-label {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: normal; /* Texto normal, fica bold só na seleção ou não, a seu gosto */
+    color: var(--text-primary);
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    
+    padding: 1px 2px; /* Espaço para o fundo azul não colar na letra */
+    border: 1px solid transparent; /* Reserva espaço para a borda não pular a tela */
+    border-radius: 1px;
+  }
+
+  /* --- IMAGEM (GRÁFICO) --- */
+  .icon-graphic {
+    width: 100px;
+    height: 100px;
+    
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    transition: filter 0.1s; /* Transição suave do filtro de cor */
+    
+    /* Se não tiver imagem ainda, mantém transparente ou um placeholder se quiser */
+  }
+}
+
+/* --- ESTADO SELECIONADO (CLIQUE ÚNICO) --- */
+.desktop-icon.selected {
+  
+  /* 1. Efeito na Imagem (Filtro Azul) */
+  .icon-graphic {
+    /* Essa combinação cria um tom azulado sobre qualquer imagem PNG colorida */
+    filter: sepia(100%) hue-rotate(190deg) saturate(1000%) opacity(1);
+  }
+
+  /* 2. Efeito no Label (Fundo Azul + Pontilhado) */
+  .icon-label {
+    background-color: rgba(0, 0, 150, 0.8); /* Azul clássico de seleção */
+    color: white; /* Texto fica branco para ler no azul */
+    text-shadow: none; /* Remove sombra para leitura limpa */
+    
+    /* O Pontilhado Preto nas extremidades */
+    border: 1px dotted black;
+  }
+}
+
+/* --- MAPEAMENTO DAS IMAGENS (Igual ao anterior) --- */
+.icon-about .icon-graphic { background-image: url('/assets/about.png'); }
+.icon-work .icon-graphic { background-image: url('/assets/work.png'); }
+.icon-social .icon-graphic { background-image: url('/assets/social.png'); }
+.icon-contact .icon-graphic { background-image: url('/assets/contact.png'); }
+
+/* Note: Removi o :active antigo porque agora usamos a classe .selected */

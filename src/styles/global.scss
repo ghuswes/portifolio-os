@@ -1,0 +1,59 @@
+/* src/styles/global.scss */
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+  /* --- PALETA DE CORES EDITÁVEL --- */
+  --bg-color: #bce6ff;        /* Azul claro do fundo */
+  --window-bg: #ffffff;       /* Fundo da janela */
+  --window-header: #4a4a4a;   /* Barra cinza da janela */
+  --text-primary: #4a4a4a;    /* Cor do texto principal */
+  --accent-color: #ffba08;    /* Amarelo da estrela/destaque */
+  
+  /* --- TAMANHOS --- */
+  --header-height: 30px;
+  --dock-height: 60px;
+
+  --window-width: 600px;
+  --window-height: 400px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Varela Round', sans-serif; /* Fonte arredondada fofa */
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow: hidden; /* Impede scroll na página inteira (estilo Desktop) */
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Container principal que segura tudo */
+#root {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.desktop {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* Garante que nada saia da tela */
+}
+
+img, 
+.os-window, 
+.desktop-icon,
+.icon-graphic,
+.control-btn {
+  /* Diz para o Chrome/Edge/Safari: "Não borre, mostre o pixel cru" */
+  image-rendering: pixelated; 
+  
+  /* Diz para o Firefox */
+  image-rendering: -moz-crisp-edges; 
+}

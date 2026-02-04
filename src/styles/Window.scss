@@ -1,0 +1,170 @@
+/* src/styles/Window.scss */
+
+.os-window {
+  /* Defina aqui a grossura da sua borda desenhada */
+  --border-size: 60px;
+
+  /* --- DIMENSÕES E POSIÇÃO --- */
+  width: var(--window-width);
+  height: var(--window-height);
+  
+  /* Centralização */
+  position: absolute;
+  top: calc(50% - (var(--window-height) / 2));
+  left: calc(50% - (var(--window-width) / 2));
+
+  /* --- A MÁGICA DA MOLDURA (9-SLICE) --- */
+  /* 1. Define o espaço reservado para a borda na tela */
+  border-style: solid;
+  border-width: 60px; /* Ajuste aqui a grossura visual da borda na tela */
+  border-color: transparent;
+
+  /* 2. Aplica a imagem */
+  border-image-source: url('/assets/window-frame.png');
+  
+  /* 3. O Corte (Slice) */
+  /* O número 60 significa que ele pega 60px de cada canto da sua imagem original de 300px.
+     Se o canto estiver estranho, tente aumentar ou diminuir esse valor (ex: 50 ou 70) */
+  border-image-slice: 30 fill; 
+  
+  /* 4. Como preencher os lados */
+  /* 'stretch' estica a imagem. 'round' repete o padrão. Tente trocar se ficar feio. */
+  border-image-repeat: round; 
+
+  /* --- ESTILO INTERNO --- */
+  /* Se sua imagem tiver centro transparente, essa cor será o fundo */
+  background-color: #f7ecff; /* Mesma cor do fundo ou branco, ajuste conforme seu gosto */
+  
+  /* Importante: permite que o header suba para a borda */
+  overflow: visible; 
+  
+  display: flex;
+  flex-direction: column;
+  box-shadow: none; /* A sombra geralmente vem desenhada na imagem, se não tiver, pode adicionar aqui */
+}
+
+/* --- O CABEÇALHO (Agora transparente e reposicionado) --- */
+.window-header {
+  /* LARGURA: 100% do conteúdo + Borda Esquerda + Borda Direita */
+  width: calc(100% + (var(--border-size) * 2));
+  
+  /* ALTURA: Mesma altura da borda superior (ou um pouco menos se preferir) */
+  height: calc(10% + (var(--border-size)) * 0.30);
+  
+   /* POSIÇÃO: Puxa para Cima e para a Esquerda exatamente o tamanho da borda */
+  position: absolute;
+  top: calc(var(--border-size) * -1);
+  left: calc(var(--border-size) * -1);
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espalha título e botões */
+  padding: 0 15px; /* Espaçamento lateral */
+  
+  /* Visual */
+  background-color: transparent; 
+  cursor: grab;
+  z-index: 10;
+
+  /* Para debug: descomente a linha abaixo para ver a área vermelha onde você pode clicar */
+  // background-color: rgba(255, 0, 0, 0.3);
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.window-title {
+  /* Estilização do texto "home" */
+  font-weight: bold;
+  color: #4a4a4a; /* Cor do texto do título */
+  font-size: 1rem;
+
+  /* Se precisar empurrar o texto um pouquinho pra cima ou baixo */
+  transform: translateY(2px); 
+}
+
+.window-controls {
+  display: flex;
+  gap: 5px; /* Espaço entre os botões */
+  
+  transform: translateY(3px);
+
+  /* Ajuste vertical para alinhar com o título */
+  align-items: center; 
+  height: 100%; 
+
+  .control-btn {
+    /* Tamanho do botão na tela */
+    width: 30px; 
+    height: 30px;
+    
+    border: none;
+    cursor: pointer;
+    background-color: transparent; /* Fundo transparente */
+    
+    /* Configuração da imagem */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    /* Efeito de clique */
+    &:active {
+      transform: translateY(1px); /* Pequeno movimento físico */
+    }
+  }
+
+  /* --- IMAGEM DE MINIMIZAR --- */
+  .minimize {
+    background-image: url('/assets/btn-min.png');
+  }
+  .minimize:active {
+    background-image: url('/assets/btn-min-pressed.png');
+  }
+
+  /* --- IMAGEM DE FECHAR --- */
+  .close {
+    background-image: url('/assets/btn-close.png');
+  }
+  .close:active {
+    background-image: url('/assets/btn-close-pressed.png');
+  }
+}
+
+.window-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Garante que estique lateralmente */
+  
+  /* --- CALIBRAGEM DE EXPANSÃO (O Segredo) --- */
+  /* 
+     Como sua borda é grossa no código (ex: 50px) mas o desenho pode ser fino,
+     temos um buraco vazio entre o conteúdo e a moldura.
+     Usamos margens negativas para empurrar o conteúdo para DENTRO da borda.
+     
+     Ajuste os valores abaixo até a barra colar no desenho sem cobri-lo.
+  */
+  margin-left: -50px;   /* Empurra para a Esquerda */
+  margin-right: -50px;  /* Empurra para a Direita (Onde fica o Scroll) */
+  margin-bottom: -50px; /* Empurra para Baixo */
+  margin-top: -10px; /* Empurra para Baixo */
+  
+  /* Compensa a largura para não quebrar o layout */
+  width: calc(100% + 100px); 
+  
+  /* ------------------------------------------ */
+
+  height: 100%; 
+  overflow: hidden; 
+  padding: 0; 
+}
+
+/* Sobrescreve a posição apenas para a janela Sobre Mim */
+.os-window.about-window {
+  top: 25%; /* Mais pra cima (Home é 50%) */
+  left: 30%; /* Mais pra esquerda (Home é 50%) */
+  
+  /* Se quiser um tamanho diferente, pode por aqui também */
+  /* width: 500px; */ 
+}
