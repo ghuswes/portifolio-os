@@ -8,19 +8,19 @@
   overflow-y: auto;
   overflow-x: hidden;
   
-  /* CRUCIAL: Padding ZERO aqui para o cabeçalho e o scroll encostarem na borda */
+  /* Padding ZERO aqui para o cabeçalho e o scroll encostarem na borda */
   padding: 0; 
   
   display: flex;
   flex-direction: column;
   text-align: left;
 
-  /* --- CABEÇALHO (Ocupa largura total) --- */
+  /* --- CABEÇALHO --- */
   .about-header {
     /* Cor de destaque */
     background-color: #fdecd7; // #f7ecff <- cor do fundo
     
-    /* Padding INTERNO (o texto desgruda da borda, mas o fundo encosta) */
+    /* Padding INTERNO */
     padding: 30px 20px; 
     
     display: flex;
@@ -37,6 +37,7 @@
       background-size: cover;
       background-position: center;
       box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+      flex-shrink: 0;
     }
 
     .header-text {
@@ -68,7 +69,7 @@
   /* --- SCROLLBAR CORRIGIDA --- */
   
   &::-webkit-scrollbar {
-    width: 20px; /* Largura fixa igual suas imagens */
+    width: 20px; /* Largura fixa */
     background-color: transparent;
   }
 
@@ -79,7 +80,7 @@
     background-repeat: repeat-y;
   }
 
-  /* THUMB (A BARRA) - Simplificado para aparecer */
+  /* THUMB (A BARRA) */
   &::-webkit-scrollbar-thumb {
     /* Cor de fundo de segurança (caso a imagem falhe) */
     background-color: #999; 

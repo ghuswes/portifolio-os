@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import Draggable from 'react-draggable';
 import '../styles/Window.scss';
 
-// Adicionamos 'zIndex' e 'onFocus' nas props recebidas
 const Window = ({ 
   isOpen, 
   isMinimized, 
@@ -10,8 +9,8 @@ const Window = ({
   onMinimize, 
   children, 
   title = "home",
-  zIndex,   // NOVO: Controla a ordem de empilhamento
-  onFocus,   // NOVO: Função para trazer pra frente ao clicar
+  zIndex,   // Controla a ordem de empilhamento
+  onFocus,   // Função para trazer pra frente ao clicar
   className
 }) => {
   const nodeRef = useRef(null);
@@ -22,7 +21,7 @@ const Window = ({
     <Draggable
       handle=".window-header"
       nodeRef={nodeRef}
-      bounds="parent" // Agora vai funcionar porque o pai direto é o Desktop grandão
+      bounds="parent"
       onMouseDown={onFocus} // Quando começar a arrastar, já foca a janela
     >
       <div 
@@ -33,7 +32,7 @@ const Window = ({
         // Também focamos se clicar em qualquer lugar da janela (não só na barra)
         onMouseDown={onFocus} 
       >
-        {/* Barra de Título (Header) */}
+        {/* Barra de Título */}
         <div className="window-header">
           <span className="window-title">{title}</span>
           
