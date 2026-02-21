@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Window from './components/Window'
 import DesktopIcon from './components/DesktopIcon'
-import AboutMe from './components/content/AboutMe' // Importe o conteúdo novo
+import AboutMe from './components/content/AboutMe'
+import Social from './components/content/Social'
 
 function App() {
   // --- ESTADOS DA JANELA HOME ---
@@ -12,34 +13,56 @@ function App() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAboutMinimized, setIsAboutMinimized] = useState(false);
 
-  // --- CONTROLE DE FOCO (Z-INDEX) ---
-  // Guarda o ID da janela que está na frente ('home' ou 'about')
-  const [activeWindow, setActiveWindow] = useState('home');
+  // --- ESTADOS DA JANELA SOCIAL ---
+  const [isSocialOpen, setIsSocialOpen] = useState(false);
+  const [isSocialMinimized, setIsSocialMinimized] = useState(false);
 
-  // --- CONTROLE DE ÍCONES ---
+  // --- CONTROLE DE FOCO ---
+  const [activeWindow, setActiveWindow] = useState('home');
   const [selectedIconId, setSelectedIconId] = useState(null);
 
-  // Função para trazer a janela para frente ao clicar nela
-  const focusWindow = (windowId) => {
-    setActiveWindow(windowId);
-  };
-
-  // --- LÓGICA DO DUPLO CLIQUE (ABRIR JANELAS) ---
-  const handleIconAction = (id) => {
-    if (id === 'about') {
-      setIsAboutOpen(true);       // Abre a janela
-      setIsAboutMinimized(false); // Garante que não está minimizada
-      setActiveWindow('about');   // Traz para frente
-    } else {
-      alert(`Funcionalidade para ${id} em breve!`);
-    }
-  };
-
-  // --- MANIPULADORES GERAIS ---
+  const focusWindow = (windowId) => setActiveWindow(windowId);
   const handleDeselectAll = () => setSelectedIconId(null);
   const handleIconSelect = (id) => setSelectedIconId(id);
 
-  // Dados dos ícones
+  // --- LÓGICA DO DUPLO CLIQUE ---
+  const handleIconAction = (id) => {
+    switch (id) {
+      // Abrir Janelas Internas
+      case 'about':
+        setIsAboutOpen(true);
+        setIsAboutMinimized(false);
+        focusWindow('about');
+        break;
+      
+      case 'social':
+        setIsSocialOpen(true);
+        setIsSocialMinimized(false);
+        focusWindow('social');
+        break;
+
+      // Links Externos
+      case 'github':
+        window.open('https://github.com/ghuswes/', '_blank');
+        break;
+      
+      case 'instagram':
+        window.open('https://instagram.com/ghus_wes/', '_blank');
+        break;
+
+      case 'linkedin':
+        window.open('https://linkedin.com/in/ghuswes/', '_blank');
+        break;
+
+      case 'discord':
+      window.open('https://discord.com/users/411625986979790858', '_blank');
+      break;
+
+      default:
+        alert(`Funcionalidade para ${id} em breve!`);
+    }
+  };
+
   const menuItems = [
     { id: 'about', label: 'Sobre mim' },
     { id: 'work', label: 'Trabalhos' },
@@ -50,6 +73,7 @@ function App() {
   return (
     <div className="desktop" onClick={handleDeselectAll}>
       
+      {/* Botão de segurança da Home */}
       {!isHomeOpen && (
         <button 
           onClick={(e) => { e.stopPropagation(); setIsHomeOpen(true); focusWindow('home'); }} 
@@ -66,18 +90,13 @@ function App() {
         onClose={() => setIsHomeOpen(false)}
         onMinimize={() => setIsHomeMinimized(true)}
         title="home"
-        
-        /* Novas Props passadas direto */
         zIndex={activeWindow === 'home' ? 2 : 1}
         onFocus={() => focusWindow('home')}
       >
-        <div className="home-content" 
+         <div className="home-content" 
           style={{ 
-            display: 'flex', 
-            flexDirection: 'column',
-            alignItems: 'center', 
-            width: '100%', 
-            padding: '20px',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', 
+            width: '100%', padding: '20px',
           }}>
           <div style={{ marginBottom: 40, textAlign: 'center', pointerEvents: 'none' }}>
             <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', marginTop: '2rem' }}>
@@ -105,13 +124,29 @@ function App() {
         onClose={() => setIsAboutOpen(false)}
         onMinimize={() => setIsAboutMinimized(true)}
         title="sobre mim"
-        className="about-window"  /* Classe customizada para estilos específicos */
-        
-        /* Novas Props passadas direto */
+        className="about-window"
         zIndex={activeWindow === 'about' ? 2 : 1}
         onFocus={() => focusWindow('about')}
       >
         <AboutMe />
+      </Window>
+
+      {/* --- JANELA 3: SOCIAL --- */}
+      <Window 
+        isOpen={isSocialOpen}
+        isMinimized={isSocialMinimized}
+        onClose={() => setIsSocialOpen(false)}
+        onMinimize={() => setIsSocialMinimized(true)}
+        title="social"
+        className="social-window" 
+        zIndex={activeWindow === 'social' ? 2 : 1}
+        onFocus={() => focusWindow('social')}
+      >
+        <Social 
+          selectedIconId={selectedIconId}
+          onSelect={handleIconSelect}
+          onDoubleClick={handleIconAction}
+        />
       </Window>
       
       {/* --- BARRA DE TAREFAS (DOCK) --- */}
@@ -122,9 +157,11 @@ function App() {
         {isHomeMinimized && (
           <DockItem label="Home" onClick={() => { setIsHomeMinimized(false); focusWindow('home'); }} />
         )}
-        
         {isAboutMinimized && (
           <DockItem label="Sobre Mim" onClick={() => { setIsAboutMinimized(false); focusWindow('about'); }} />
+        )}
+        {isSocialMinimized && (
+          <DockItem label="Social" onClick={() => { setIsSocialMinimized(false); focusWindow('social'); }} />
         )}
       </div>
 
@@ -132,7 +169,7 @@ function App() {
   )
 }
 
-// Componente simples para os itens da barra de tarefas
+// Componente simples da Dock
 const DockItem = ({ label, onClick }) => (
   <div 
     onClick={(e) => { e.stopPropagation(); onClick(); }}

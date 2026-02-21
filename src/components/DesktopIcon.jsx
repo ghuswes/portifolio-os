@@ -23,7 +23,7 @@ const DesktopIcon = ({ label, id, isSelected, onSelect, onDoubleClick }) => {
       {/* Container da Imagem */}
       <div className="icon-graphic"></div>
       
-      {/* Label (Texto) */}
+      {/* Label */}
       <span className="icon-label">{label}</span>
     </div>
   );

@@ -7,15 +7,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px; /* Reduzi um pouco para o label ficar perto */
+  gap: 2px; /* o label fica perto */
   width: 85px; /* Definindo uma largura para a área de clique ficar consistente */
   // background-color: rgba(255, 0, 0, 0.3);
   
-  /* --- LABEL (TEXTO) --- */
+  /* --- LABEL --- */
   .icon-label {
     font-family: inherit;
     font-size: 0.9rem;
-    font-weight: normal; /* Texto normal, fica bold só na seleção ou não, a seu gosto */
+    font-weight: normal; /* Texto normal, fica bold só na seleção ou não */
     color: var(--text-primary);
     text-shadow: 0 1px 2px rgba(255,255,255,0.5);
     
@@ -24,7 +24,7 @@
     border-radius: 1px;
   }
 
-  /* --- IMAGEM (GRÁFICO) --- */
+  /* --- IMAGEM --- */
   .icon-graphic {
     width: 100px;
     height: 100px;
@@ -33,12 +33,10 @@
     background-repeat: no-repeat;
     background-position: center bottom;
     transition: filter 0.1s; /* Transição suave do filtro de cor */
-    
-    /* Se não tiver imagem ainda, mantém transparente ou um placeholder se quiser */
   }
 }
 
-/* --- ESTADO SELECIONADO (CLIQUE ÚNICO) --- */
+/* --- ESTADO SELECIONADO --- */
 .desktop-icon.selected {
   
   /* 1. Efeito na Imagem (Filtro Azul) */
@@ -58,10 +56,26 @@
   }
 }
 
-/* --- MAPEAMENTO DAS IMAGENS (Igual ao anterior) --- */
+/* --- MAPEAMENTO DAS IMAGENS --- */
 .icon-about .icon-graphic { background-image: url('/assets/about.png'); }
 .icon-work .icon-graphic { background-image: url('/assets/work.png'); }
 .icon-social .icon-graphic { background-image: url('/assets/social.png'); }
 .icon-contact .icon-graphic { background-image: url('/assets/contact.png'); }
 
-/* Note: Removi o :active antigo porque agora usamos a classe .selected */
+/* --- ÍCONES DA JANELA SOCIAL --- */
+
+.icon-github .icon-graphic {
+  background-image: url('/assets/github.png');
+}
+
+.icon-instagram .icon-graphic {
+  background-image: url('/assets/instagram.png');
+}
+
+.icon-linkedin .icon-graphic {
+  background-image: url('/assets/linkedin.png');
+}
+
+.icon-discord .icon-graphic {
+  background-image: url('/assets/discord.png');
+}
