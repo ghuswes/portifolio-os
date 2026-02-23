@@ -2,19 +2,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 :root {
-  /* --- PALETA DE CORES EDITÁVEL --- */
+  /* --- TEMA CLARO (DEFAULT) --- */
   --bg-color: #bce6ff;        /* Azul claro do fundo */
   --window-bg: #ffffff;       /* Fundo da janela */
   --window-header: #4a4a4a;   /* Barra cinza da janela */
   --text-primary: #4a4a4a;    /* Cor do texto principal */
   --accent-color: #ffba08;    /* Amarelo da estrela/destaque */
-  
+  --window-border-color: transparent; /* ajuste de borda */ 
+
   /* --- TAMANHOS --- */
   --header-height: 30px;
   --dock-height: 60px;
 
   --window-width: 600px;
   --window-height: 400px;
+}
+
+/* --- TEMA ESCURO (OVERRIDE) */
+[dark-theme='dark'] {
+  --bg-color: #1a1a2e;        /* Azul bem escuro ou preto para fundo */
+  --window-bg: #2b2b40;       /* Fundo da janela escuro (Cinza azulado) */
+  --text-primary: #f0f0f0;    /* Texto Branco */
+  --accent-color: #ffd700;    /* Amarelo um pouco mais brilhante para contraste */ 
 }
 
 * {
@@ -43,13 +52,45 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  overflow: hidden; /* Garante que nada saia da tela */
+  overflow: hidden;
+  
+  /* Cor de fundo base (transição suave da cor) */
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+
+  /* Configuração para a Imagem/GIF cobrir tudo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-img, 
-.os-window, 
-.desktop-icon,
-.icon-graphic,
+/* --- A MATRIZ DE 4 ESTADOS DE FUNDO --- */
+
+/* 1. CLARO + ESTÁTICO (Padrão) */
+.desktop {
+  background-image: url('/assets/wallpaper.png');
+}
+
+/* 2. CLARO + GIF */
+.desktop[data-bg='gif'] {
+  background-image: url('/assets/wallpaper.gif');
+}
+
+/* 3. ESCURO + ESTÁTICO */
+.desktop[data-theme='dark'] {
+  background-image: url('/assets/wallpaper-dark.png');
+}
+
+/* 4. ESCURO + GIF */
+.desktop[data-theme='dark'][data-bg='gif'] {
+  background-image: url('/assets/wallpaper-dark.gif');
+}
+
+.os-window {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+img, .os-window, .desktop-icon, .icon-graphic,
 .control-btn {
   /* Diz para o Chrome/Edge/Safari: "Não borre, mostre o pixel cru" */
   image-rendering: pixelated; 
