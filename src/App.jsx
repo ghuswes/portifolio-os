@@ -3,6 +3,8 @@ import Window from './components/Window'
 import DesktopIcon from './components/DesktopIcon'
 import AboutMe from './components/content/AboutMe'
 import Social from './components/content/Social'
+import ThemeToggle from './components/ThemeToggle'
+import BackgroundToggle from './components/BackgroundToggle'
 
 function App() {
   // --- ESTADOS DA JANELA HOME ---
@@ -24,6 +26,22 @@ function App() {
   const focusWindow = (windowId) => setActiveWindow(windowId);
   const handleDeselectAll = () => setSelectedIconId(null);
   const handleIconSelect = (id) => setSelectedIconId(id);
+
+  // --- TEMA ---
+  const [theme, setTheme] = useState('light'); // Começa no claro
+
+  // --- TIPO DE FUNDO ---
+  const [bgType, setBgType] = useState('static'); // 'static' ou 'gif'
+
+  // Função para trocar
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  // --- TROCAR FUNDO ---
+  const toggleBg = () => {
+    setBgType((prev) => (prev === 'static' ? 'gif' : 'static'));
+  };
 
   // --- LÓGICA DO DUPLO CLIQUE ---
   const handleIconAction = (id) => {
@@ -71,13 +89,19 @@ function App() {
   ];
 
   return (
-    <div className="desktop" onClick={handleDeselectAll}>
+    <div className="desktop" onClick={handleDeselectAll} data-theme={theme} data-bg={bgType}>
       
+      {/* --- BOTÃO DE TEMA --- */}
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+
+      {/* BOTÃO FUNDO (GIF/Static) */}
+      <BackgroundToggle bgType={bgType} toggleBg={toggleBg} />
+
       {/* Botão de segurança da Home */}
       {!isHomeOpen && (
         <button 
           onClick={(e) => { e.stopPropagation(); setIsHomeOpen(true); focusWindow('home'); }} 
-          style={{position: 'absolute', top: 20, left: 20, zIndex: 1000}}
+          style={{position: 'absolute', top: 140, left: 20, zIndex: 1000}}
         >
           Abrir Home
         </button>
