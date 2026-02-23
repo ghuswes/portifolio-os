@@ -66,24 +66,24 @@ body {
 
 /* --- A MATRIZ DE 4 ESTADOS DE FUNDO --- */
 
-/* 1. CLARO + ESTÁTICO (Padrão) */
+/* 1. CLARO + GIF (Padrão) */
 .desktop {
-  background-image: url('/assets/wallpaper.png');
-}
-
-/* 2. CLARO + GIF */
-.desktop[data-bg='gif'] {
   background-image: url('/assets/wallpaper.gif');
 }
 
-/* 3. ESCURO + ESTÁTICO */
-.desktop[data-theme='dark'] {
-  background-image: url('/assets/wallpaper-dark.png');
+/* 2. CLARO + ESTÁTICO */
+.desktop[data-bg='static'] {
+  background-image: url('/assets/wallpaper.png');
 }
 
-/* 4. ESCURO + GIF */
-.desktop[data-theme='dark'][data-bg='gif'] {
+/* 3. ESCURO + GIF */
+.desktop[data-theme='dark'] {
   background-image: url('/assets/wallpaper-dark.gif');
+}
+
+/* 4. ESCURO + ESTÁTICO */
+.desktop[data-theme='dark'][data-bg='static'] {
+  background-image: url('/assets/wallpaper-dark.png');
 }
 
 .os-window {

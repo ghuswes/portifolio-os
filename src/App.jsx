@@ -31,7 +31,7 @@ function App() {
   const [theme, setTheme] = useState('light'); // Começa no claro
 
   // --- TIPO DE FUNDO ---
-  const [bgType, setBgType] = useState('static'); // 'static' ou 'gif'
+  const [bgType, setBgType] = useState('gif'); // 'static' ou 'gif'
 
   // Função para trocar
   const toggleTheme = () => {
