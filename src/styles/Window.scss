@@ -32,7 +32,8 @@
 
   /* --- ESTILO INTERNO --- */
   /* Se sua imagem tiver centro transparente, essa cor será o fundo */
-  background-color: #f7ecff;
+  background-color: var(--window-bg);
+  transition: background-color 0.3s ease;
   
   /* Importante: permite que o header suba para a borda */
   overflow: visible; 
@@ -76,7 +77,7 @@
 .window-title {
   /* Estilização do texto "home" */
   font-weight: bold;
-  color: #4a4a4a; /* Cor do texto do título */
+  color: var(--text-primary); /* Cor do texto do título */
   font-size: 1rem;
 
   /* Se precisar empurrar o texto um pouquinho pra cima ou baixo */
@@ -97,7 +98,7 @@
     /* Tamanho do botão na tela */
     width: 30px; 
     height: 30px;
-    
+    color: var(--text-primary);
     border: none;
     cursor: pointer;
     background-color: transparent; /* Fundo transparente */
