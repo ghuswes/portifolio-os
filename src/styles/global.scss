@@ -7,6 +7,7 @@
   --window-bg: #ffffff;       /* Fundo da janela */
   --window-header: #4a4a4a;   /* Barra cinza da janela */
   --text-primary: #4a4a4a;    /* Cor do texto principal */
+  --text-secondary: #666666; /* Cinza para tema claro */
   --accent-color: #ffba08;    /* Amarelo da estrela/destaque */
   --window-border-color: transparent; /* ajuste de borda */ 
 
@@ -19,10 +20,11 @@
 }
 
 /* --- TEMA ESCURO (OVERRIDE) */
-[dark-theme='dark'] {
+[data-theme='dark'] {
   --bg-color: #1a1a2e;        /* Azul bem escuro ou preto para fundo */
-  --window-bg: #2b2b40;       /* Fundo da janela escuro (Cinza azulado) */
-  --text-primary: #f0f0f0;    /* Texto Branco */
+  --window-bg: #616161;       /* Fundo da janela escuro (Cinza azulado) */
+  --text-primary: #ffffff;    /* Texto Branco */
+  --text-secondary: #cccccc; /* Cinza claro para tema escuro */
   --accent-color: #ffd700;    /* Amarelo um pouco mais brilhante para contraste */ 
 }
 
