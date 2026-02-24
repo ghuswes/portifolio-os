@@ -29,7 +29,7 @@ const ThemeToggle = ({ theme, toggleTheme }) => {
       <img 
         // Se o tema for 'light', mostra o botão para ir pro dark (Lua)
         // Se o tema for 'dark', mostra o botão para ir pro light (Sol)
-        src={theme === 'light' ? '/assets/btn-theme-light.png' : '/assets/btn-theme-dark.png'} 
+        src={theme === 'light' ? './assets/btn-theme-light.png' : './assets/btn-theme-dark.png'} 
         alt="Trocar Tema"
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />

@@ -70,22 +70,22 @@ body {
 
 /* 1. CLARO + GIF (Padrão) */
 .desktop {
-  background-image: url('/assets/wallpaper.gif');
+  background-image: url('/portifolio-os/assets/wallpaper.gif');
 }
 
 /* 2. CLARO + ESTÁTICO */
 .desktop[data-bg='static'] {
-  background-image: url('/assets/wallpaper.png');
+  background-image: url('/portifolio-os/assets/wallpaper.png');
 }
 
 /* 3. ESCURO + GIF */
 .desktop[data-theme='dark'] {
-  background-image: url('/assets/wallpaper-dark.gif');
+  background-image: url('/portifolio-os/assets/wallpaper-dark.gif');
 }
 
 /* 4. ESCURO + ESTÁTICO */
 .desktop[data-theme='dark'][data-bg='static'] {
-  background-image: url('/assets/wallpaper-dark.png');
+  background-image: url('/portifolio-os/assets/wallpaper-dark.png');
 }
 
 .os-window {
