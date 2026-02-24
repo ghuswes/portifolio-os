@@ -7,7 +7,7 @@ const AboutMe = () => {
       {/* Topo: Foto e Nome */}
       <div className="about-header">
         {/* Placeholder da Foto */}
-        <div className="profile-photo" style={{backgroundImage: 'url(../../assets/portrait.png)'}}></div>
+        <div className="profile-photo" style={{backgroundImage: 'url(/portifolio-os/assets/portrait.png)'}}></div>
         
         <div className="header-text">
           <h2>Gustavo Henrique</h2>
@@ -52,7 +52,7 @@ const AboutMe = () => {
             <li>Games, de JRPG a jogos de Puzzle</li>
             <li>Leio mangás, vejo alguns animes (principalmente os que são obras de arte visuais)</li>
             <li>Gosto de desenhar</li>
-            <li>Gosto de TCGs em geral, MTG, Pokémon, Yu-gi-oh e FaB!</li>
+            <li>Gosto de TCGs em geral, MTG, Pokémon, YGO e FaB</li>
           </ul>
         </div>
 

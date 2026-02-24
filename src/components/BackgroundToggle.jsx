@@ -28,7 +28,7 @@ const BackgroundToggle = ({ bgType, toggleBg }) => {
     >
       <img 
         // Lógica: Se está estático, mostra o botão para por GIF. Se está GIF, mostra botão para por estático.
-        src={bgType === 'static' ? '/assets/btn-bg-static.png' : '/assets/btn-bg-gif.png'} 
+        src={bgType === 'static' ? './assets/btn-bg-static.png' : './assets/btn-bg-gif.png'} 
         alt="Trocar Background"
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />

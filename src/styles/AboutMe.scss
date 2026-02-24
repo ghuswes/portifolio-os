@@ -75,7 +75,7 @@
 
   /* TRILHO */
   &::-webkit-scrollbar-track {
-    background-image: url('/assets/scroll-track.png');
+    background-image: url('/portifolio-os/assets/scroll-track.png');
     background-size: 20px 20px; /* Força o tamanho do padrão */
     background-repeat: repeat-y;
   }
@@ -85,7 +85,7 @@
     /* Cor de fundo de segurança (caso a imagem falhe) */
     background-color: #999; 
     
-    background-image: url('/assets/scroll-thumb.png');
+    background-image: url('/portifolio-os/assets/scroll-thumb.png');
     background-size: 100% 100%; /* Estica a imagem no tamanho da barra */
     background-repeat: no-repeat;
     
@@ -106,18 +106,18 @@
 
   /* Topo */
   &::-webkit-scrollbar-button:single-button:vertical:decrement {
-    background-image: url('/assets/scroll-up.png');
+    background-image: url('/portifolio-os/assets/scroll-up.png');
   }
   &::-webkit-scrollbar-button:single-button:vertical:decrement:active {
-    background-image: url('/assets/scroll-up-pressed.png');
+    background-image: url('/portifolio-os/assets/scroll-up-pressed.png');
   }
 
   /* Fundo */
   &::-webkit-scrollbar-button:single-button:vertical:increment {
-    background-image: url('/assets/scroll-down.png');
+    background-image: url('/portifolio-os/assets/scroll-down.png');
   }
   &::-webkit-scrollbar-button:single-button:vertical:increment:active {
-    background-image: url('/assets/scroll-down-pressed.png');
+    background-image: url('/portifolio-os/assets/scroll-down-pressed.png');
   }
 
   /* Esconde botões fantasmas */
