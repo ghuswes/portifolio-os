@@ -76,12 +76,12 @@
 
 .window-title {
   /* Estilização do texto "home" */
-  font-weight: bold;
+  // font-weight: bold;
   color: var(--text-primary); /* Cor do texto do título */
-  font-size: 1rem;
+  font-size: 2rem;
 
   /* Se precisar empurrar o texto um pouquinho pra cima ou baixo */
-  transform: translateY(2px); 
+  transform: translateY(-2px); 
 }
 
 .window-controls {
@@ -182,6 +182,7 @@
   }
 
   .window-title {
-    transform: translateY(8px);
+    transform: translateY(4px);
   }
+
 }

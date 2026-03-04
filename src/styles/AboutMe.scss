@@ -18,7 +18,8 @@
   /* --- CABEÇALHO --- */
   .about-header {
     /* Cor de destaque */
-    background-color: #fdecd7; // #f7ecff <- cor do fundo
+    background-color: var(--header-highlight);
+    transition: background-color 0.3s ease;
     
     /* Padding INTERNO */
     padding: 30px 20px; 
@@ -32,8 +33,8 @@
 
     .profile-photo {
       width: 150px; height: 150px;
-      border: 2px solid var(--text-primary);
-      background-color: #fff; 
+      border: 2px solid var(--photo-border);
+      background-color: var(--window-bg); 
       background-size: cover;
       background-position: center;
       box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
@@ -43,8 +44,8 @@
     .header-text {
       display: flex;
       flex-direction: column;
-      h2 { font-size: 1.8rem; margin: 0; color: var(--text-primary); }
-      span { font-size: 1rem; color: #666; margin-top: 5px; }
+      h2 { font-size: 2rem; margin: 0; color: var(--text-primary); }
+      span { font-size: 1.5rem; color: var(--text-secondary); margin-top: 5px; }
     }
   }
 
@@ -53,17 +54,31 @@
     padding: 20px; /* Afasta o texto das bordas e do scroll */
     padding-right: 10px; /* Um pouco menos na direita pra não colar no scroll */
     
-    .topic-section {
+    .topic-section h3 {
       margin-bottom: 25px;
-      h3 { font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; }
-      ul { 
-        list-style-type: none; padding-left: 5px;
-        li { 
-          margin-bottom: 8px; position: relative; padding-left: 18px;
-          &:before { content: "•"; position: absolute; left: 0; color: var(--accent-color); font-weight: bold; }
-        }
+      font-size: 1.8rem; margin-bottom: 10px; color: var(--text-primary);
       }
+
+    .topic-section ul {
+      list-style-type: none; 
+      padding-left: 5px; 
+      font-size: 1.6rem; 
+      color: var(--text-primary); 
+      line-height: 1.1;
     }
+
+    .topic-section li {
+      margin-bottom: 8px; 
+      position: relative; 
+      padding-left: 18px;
+      color: var(--text-secondary);
+      &:before { 
+        content: "*"; 
+        position: absolute; 
+        left: 0; 
+        color: var(--text-secondary); 
+        font-size: 1.6rem; 
+        line-height: 1.8;}}
   }
 
   /* --- SCROLLBAR CORRIGIDA --- */

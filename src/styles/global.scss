@@ -1,5 +1,20 @@
 /* src/styles/global.scss */
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+/* FONTE DE TÍTULOS */
+@font-face {
+  font-family: 'CustomTitle';
+  src: url('./fonts/GhusWrite-Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* FONTE DE TEXTOS */
+@font-face {
+  font-family: 'CustomBody';
+  src: url('./fonts/GhusWrite-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   /* --- TEMA CLARO (DEFAULT) --- */
@@ -8,8 +23,13 @@
   --window-header: #4a4a4a;   /* Barra cinza da janela */
   --text-primary: #4a4a4a;    /* Cor do texto principal */
   --text-secondary: #666666; /* Cinza para tema claro */
+  --text-link: #6a00ff;
   --accent-color: #ffba08;    /* Amarelo da estrela/destaque */
   --window-border-color: transparent; /* ajuste de borda */ 
+
+  /* FONTE */
+  --font-title: 'CustomTitle', sans-serif; /* Fallback para sans-serif se der erro */
+  --font-body:  'CustomBody', sans-serif;
 
   /* --- TAMANHOS --- */
   --header-height: 30px;
@@ -17,6 +37,11 @@
 
   --window-width: 600px;
   --window-height: 400px;
+
+  /* Cor de fundo do cabeçalho do About Me (Branco transparente) */
+  --header-highlight: #acd2e8;
+  /* Cor da borda da foto */
+  --photo-border: #4a4a4a;
 }
 
 /* --- TEMA ESCURO (OVERRIDE) */
@@ -25,7 +50,10 @@
   --window-bg: #616161;       /* Fundo da janela escuro (Cinza azulado) */
   --text-primary: #ffffff;    /* Texto Branco */
   --text-secondary: #cccccc; /* Cinza claro para tema escuro */
-  --accent-color: #ffd700;    /* Amarelo um pouco mais brilhante para contraste */ 
+  --text-link: #a86aff;
+  --accent-color: #ffd700;    /* Amarelo um pouco mais brilhante para contraste */
+  --header-highlight: #083b59;
+  --photo-border: #ffffff;
 }
 
 * {
@@ -35,12 +63,38 @@
 }
 
 body {
-  font-family: 'Varela Round', sans-serif; /* Fonte arredondada fofa */
+  font-family: var(--font-body); /* Fonte de textos */
   background-color: var(--bg-color);
   color: var(--text-primary);
   overflow: hidden; /* Impede scroll na página inteira (estilo Desktop) */
   height: 100vh;
   width: 100vw;
+}
+
+/* Fonte para títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-link);
+  cursor: pointer;
+}
+
+/* Título da janela */
+.window-title {
+  font-family: var(--font-body);
+}
+
+button, .control-btn {
+  font-family: var(--font-body);
+}
+
+/* Nomes dos ícones da área de trabalho */
+.desktop-icon .icon-label {
+  font-family: var(--font-body);
+  /* font-weight: bold; */
 }
 
 /* Container principal que segura tudo */
