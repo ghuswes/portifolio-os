@@ -31,7 +31,7 @@ const AboutMe = () => {
         <div className="topic-section">
           <h3>Formação</h3>
           <ul>
-            <li>Formei no ensino técnico em Técnico em Informática pelo IFNMG</li>
+            <li>Formado em Técnico em Informática pelo IFNMG</li>
             <li>Atualmente formando no curso Bacharelado em Ciência da Computação também pelo IFNMG</li>
           </ul>
         </div>

@@ -123,10 +123,10 @@ function App() {
             width: '100%', padding: '20px',
           }}>
           <div style={{ marginBottom: 40, textAlign: 'center', pointerEvents: 'none' }}>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', marginTop: '2rem', color: 'var(--text-primary)' }}>
+            <h1 style={{ fontSize: '3rem', marginBottom: '0.5rem', marginTop: '2rem', color: 'var(--text-primary)' }}>
               Oi! <span style={{ color: 'var(--accent-color)' }}>Gustavo</span> aqui
             </h1>
-            <p style={{ color: 'var(--text-secondary, #888)', fontSize: '0.9rem' }}>ilustrador e desenvolvedor</p>
+            <p style={{ color: 'var(--text-secondary, #888)', fontSize: '1.5rem' }}>ilustrador e desenvolvedor</p>
           </div>
           <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap' }}>
             {menuItems.map((item) => (
