@@ -23,7 +23,7 @@
   --window-header: #4a4a4a;   /* Barra cinza da janela */
   --text-primary: #4a4a4a;    /* Cor do texto principal */
   --text-secondary: #666666; /* Cinza para tema claro */
-  --text-link: #6a00ff;
+  --text-link: #6a00ff;       /* Cor do link */
   --accent-color: #ffba08;    /* Amarelo da estrela/destaque */
   --window-border-color: transparent; /* ajuste de borda */ 
 
@@ -35,8 +35,9 @@
   --header-height: 30px;
   --dock-height: 60px;
 
-  --window-width: 600px;
-  --window-height: 400px;
+  --window-width: 900px;
+  --window-height: 600px;
+  --border-size: 90px; /* grossura da borda desenhada */
 
   /* Cor de fundo do cabeçalho do About Me (Branco transparente) */
   --header-highlight: #acd2e8;
@@ -47,10 +48,10 @@
 /* --- TEMA ESCURO (OVERRIDE) */
 [data-theme='dark'] {
   --bg-color: #1a1a2e;        /* Azul bem escuro ou preto para fundo */
-  --window-bg: #616161;       /* Fundo da janela escuro (Cinza azulado) */
+  --window-bg: #353535;       /* Fundo da janela escuro (Cinza) */
   --text-primary: #ffffff;    /* Texto Branco */
   --text-secondary: #cccccc; /* Cinza claro para tema escuro */
-  --text-link: #a86aff;
+  --text-link: #a86aff;       /* Cor do link */
   --accent-color: #ffd700;    /* Amarelo um pouco mais brilhante para contraste */
   --header-highlight: #083b59;
   --photo-border: #ffffff;

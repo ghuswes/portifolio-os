@@ -22,18 +22,18 @@
     transition: background-color 0.3s ease;
     
     /* Padding INTERNO */
-    padding: 30px 20px; 
+    padding: 10% 5%; 
     
     display: flex;
-    gap: 20px;
+    gap: 5%;
     align-items: center;
     
     /* Garante que o header não encolha */
     flex-shrink: 0;
 
     .profile-photo {
-      width: 150px; height: 150px;
-      border: 2px solid var(--photo-border);
+      width: 15rem; height: 15rem;
+      border: 3px solid var(--photo-border);
       background-color: var(--window-bg); 
       background-size: cover;
       background-position: center;
@@ -44,77 +44,74 @@
     .header-text {
       display: flex;
       flex-direction: column;
-      h2 { font-size: 2rem; margin: 0; color: var(--text-primary); }
-      span { font-size: 1.5rem; color: var(--text-secondary); margin-top: 5px; }
+      h2 { font-size: 3.5rem; margin: 0; color: var(--text-primary); }
+      span { font-size: 2.5crem; color: var(--text-secondary); margin-top: 2%; }
     }
   }
 
   /* --- CORPO (Padding interno) --- */
   .about-body {
-    padding: 20px; /* Afasta o texto das bordas e do scroll */
-    padding-right: 10px; /* Um pouco menos na direita pra não colar no scroll */
+    padding: 3%; /* Afasta o texto das bordas e do scroll */
+    padding-right: 3%; /* Um pouco menos na direita pra não colar no scroll */
     
     .topic-section h3 {
-      margin-bottom: 25px;
-      font-size: 1.8rem; margin-bottom: 10px; color: var(--text-primary);
+      margin-bottom: 10%;
+      font-size: 2.5rem; margin-bottom: 2%; color: var(--text-primary);
       }
 
     .topic-section ul {
       list-style-type: none; 
-      padding-left: 5px; 
-      font-size: 1.6rem; 
+      padding-left: 2%; 
+      font-size: 2rem; 
       color: var(--text-primary); 
       line-height: 1.1;
     }
 
     .topic-section li {
-      margin-bottom: 8px; 
+      margin-bottom: 1%; 
       position: relative; 
-      padding-left: 18px;
+      padding-left: 2%;
       color: var(--text-secondary);
       &:before { 
         content: "*"; 
         position: absolute; 
         left: 0; 
         color: var(--text-secondary); 
-        font-size: 1.6rem; 
+        font-size: 2rem; 
         line-height: 1.8;}}
   }
 
-  /* --- SCROLLBAR CORRIGIDA --- */
+  /* --- SCROLLBAR RESPONSIVA --- */
   
   &::-webkit-scrollbar {
-    width: 20px; /* Largura fixa */
+    width: calc(var(--border-size) * 0.25);
     background-color: transparent;
   }
 
   /* TRILHO */
   &::-webkit-scrollbar-track {
     background-image: url('/portifolio-os/assets/scroll-track.png');
-    background-size: 20px 20px; /* Força o tamanho do padrão */
+    background-size: 100% 100%;
     background-repeat: repeat-y;
   }
 
   /* THUMB (A BARRA) */
-  &::-webkit-scrollbar-thumb {
-    /* Cor de fundo de segurança (caso a imagem falhe) */
-    background-color: #999; 
-    
+  &::-webkit-scrollbar-thumb { 
     background-image: url('/portifolio-os/assets/scroll-thumb.png');
-    background-size: 100% 100%; /* Estica a imagem no tamanho da barra */
+    background-size: 100% 100%; 
     background-repeat: no-repeat;
+    border: none;
     
-    /* Removemos bordas transparentes que podiam estar sumindo com ela */
-    border: none; 
-    
-    /* Altura mínima visual */
-    min-height: 70px; 
+    /* Altura mínima também pode ser relativa */
+    min-height: 10%;
   }
 
   /* BOTÕES */
   &::-webkit-scrollbar-button {
     display: block;
-    height: 20px; width: 20px;
+    height: 5%;
+    width: 5%;
+    
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }

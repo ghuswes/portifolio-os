@@ -10,14 +10,14 @@ const BackgroundToggle = ({ bgType, toggleBg }) => {
       title="Alternar Fundo"
       style={{
         position: 'absolute',
-        top: '80px', // Fica abaixo do botão de tema (que está em 20px + 50px altura)
-        left: '20px',
+        top: '10%',
+        left: '1%',
         zIndex: 9999,
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        width: '50px',
-        height: '50px',
+        width: '5rem',
+        height: '5rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
