@@ -9,14 +9,14 @@ const ThemeToggle = ({ theme, toggleTheme }) => {
       }}
       style={{
         position: 'absolute',
-        top: '20px',
-        left: '20px',
+        top: '2%',
+        left: '1%',
         zIndex: 9999, // Fica acima de tudo
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        width: '50px', // Ajustar conforme o desenho
-        height: '50px',
+        width: '5rem',
+        height: '5rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

@@ -1,9 +1,6 @@
 /* src/styles/Window.scss */
 
 .os-window {
-  /* grossura da borda desenhada */
-  --border-size: 60px;
-
   /* --- DIMENSÕES E POSIÇÃO --- */
   width: var(--window-width);
   height: var(--window-height);
@@ -16,7 +13,7 @@
   /* --- A MÁGICA DA MOLDURA (9-SLICE) --- */
   /* 1. Define o espaço reservado para a borda na tela */
   border-style: solid;
-  border-width: 60px; /* grossura visual da borda na tela */
+  border-width: var(--border-size); /* grossura visual da borda na tela */
   border-color: transparent;
 
   /* 2. Aplica a imagem */
@@ -49,7 +46,7 @@
   width: calc(100% + (var(--border-size) * 2));
   
   /* ALTURA: Mesma altura da borda superior */
-  height: calc(10% + (var(--border-size)) * 0.30);
+  height: calc(var(--border-size) * 0.7);
   
    /* POSIÇÃO: Puxa para Cima e para a Esquerda exatamente o tamanho da borda */
   position: absolute;
@@ -78,17 +75,18 @@
   /* Estilização do texto "home" */
   // font-weight: bold;
   color: var(--text-primary); /* Cor do texto do título */
-  font-size: 2rem;
+  font-size: 3.5rem;
 
   /* Se precisar empurrar o texto um pouquinho pra cima ou baixo */
-  transform: translateY(-2px); 
+  transform: translateY(-2px);
+  margin-left: 8px;
 }
 
 .window-controls {
   display: flex;
-  gap: 5px; /* Espaço entre os botões */
+  gap: 4px; /* Espaço entre os botões */
   
-  transform: translateY(3px);
+  transform: translateY(7px);
 
   /* Ajuste vertical para alinhar com o título */
   align-items: center; 
@@ -96,13 +94,14 @@
 
   .control-btn {
     /* Tamanho do botão na tela */
-    width: 30px; 
-    height: 30px;
+    width: 45px; 
+    height: 45px;
     color: var(--text-primary);
     border: none;
     cursor: pointer;
     background-color: transparent; /* Fundo transparente */
-    
+    transform: translateX(-2px); /* Descolar do canto direito */
+
     /* Configuração da imagem */
     background-size: contain;
     background-repeat: no-repeat;
@@ -135,24 +134,32 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* Garante que estique lateralmente */
-  
-  /* --- CALIBRAGEM DE EXPANSÃO --- */
-  /* 
-     Como a borda é grossa no código (ex: 50px) mas o desenho pode ser fino,
-     temos um buraco vazio entre o conteúdo e a moldura.
-     Usamos margens negativas para empurrar o conteúdo para DENTRO da borda.
-  */
-  margin-left: -50px;   /* Empurra para a Esquerda */
-  margin-right: -50px;  /* Empurra para a Direita (Onde fica o Scroll) */
-  margin-bottom: -50px; /* Empurra para Baixo */
-  margin-top: -10px; /* Empurra para Baixo */
-  
-  /* Compensa a largura para não quebrar o layout */
-  width: calc(100% + 100px); 
-  height: 100%; 
+  align-items: stretch;
   overflow: hidden; 
   padding: 0; 
+
+  /* --- CALIBRAGEM RESPONSIVA --- */
+  
+  --adjust-factor: 0.83; 
+
+  /* Define o quanto vamos puxar baseado no fator acima */
+  --pull-x: calc(var(--border-size) * var(--adjust-factor));       /* Laterais */
+  --pull-y: calc(var(--border-size) * var(--adjust-factor));       /* Baixo */
+  --pull-top: calc(var(--border-size) * 0.2);                     /* Topo (header) */
+
+  /* Aplica as Margens Negativas */
+  margin-left: calc(var(--pull-x) * -1);
+  margin-right: calc(var(--pull-x) * -1);
+  margin-bottom: calc(var(--pull-y) * -1);
+  margin-top: calc(var(--pull-top) * -1);
+
+  /* 
+     CORREÇÃO DE TAMANHO AUTOMÁTICA
+     Largura = 100% + (Esquerda + Direita)
+     Altura = 100% + (Topo + Baixo)
+  */
+  width: calc(100% + (var(--pull-x) * 2));
+  height: calc(100% + (var(--pull-y) + var(--pull-top))); 
 }
 
 /* Sobrescreve a posição apenas para a janela Sobre Mim */
@@ -167,8 +174,8 @@
 /* --- Estilo Específico da Janela Social --- */
 .os-window.social-window {
   /* Tamanho menor, apenas para caber 3 ícones */
-  width: 500px;
-  height: 300px;
+  width: 600px;
+  height: 600px;
   
   /* Posição sugerida: Canto inferior direito ou centro deslocado */
   top: 36%;
@@ -176,13 +183,5 @@
   
   /* Removemos o transform para respeitar o top/left exatos acima */
   transform: none;
-
-  .window-controls {
-    transform: translateY(8px); 
-  }
-
-  .window-title {
-    transform: translateY(4px);
-  }
-
+  
 }

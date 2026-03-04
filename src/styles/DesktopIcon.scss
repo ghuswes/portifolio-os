@@ -7,14 +7,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px; /* o label fica perto */
-  width: 85px; /* Definindo uma largura para a área de clique ficar consistente */
+  gap: 0.5rem; /* o label fica perto */
+  width: 8rem; /* Definindo uma largura para a área de clique ficar consistente */
   // background-color: rgba(255, 0, 0, 0.3);
   
   /* --- LABEL --- */
   .icon-label {
     font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 2rem;
     // font-weight: normal;
     color: var(--text-primary);
     text-shadow: 0 1px 2px rgba(255,255,255,0.5);
@@ -26,8 +26,8 @@
 
   /* --- IMAGEM --- */
   .icon-graphic {
-    width: 100px;
-    height: 100px;
+    width: 10rem;
+    height: 10rem;
     
     background-size: contain;
     background-repeat: no-repeat;
