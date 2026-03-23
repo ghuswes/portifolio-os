@@ -165,23 +165,21 @@
 /* Sobrescreve a posição apenas para a janela Sobre Mim */
 .os-window.about-window {
   top: 30%; /* Mais pra cima (Home é 50%) */
-  left: 25%; /* Mais pra esquerda (Home é 50%) */
-  
-  /* para um tamanho diferente, pode ser por aqui também */
-  /* width: 500px; */ 
+  left: 10%; /* Mais pra esquerda (Home é 50%) */
 }
 
 /* --- Estilo Específico da Janela Social --- */
 .os-window.social-window {
-  /* Tamanho menor, apenas para caber 3 ícones */
   width: 600px;
   height: 600px;
-  
-  /* Posição sugerida: Canto inferior direito ou centro deslocado */
   top: 36%;
   left: 40%;
-  
-  /* Removemos o transform para respeitar o top/left exatos acima */
-  transform: none;
-  
+}
+
+/* --- Estilo Específico da Janela Trabalhos --- */
+.os-window.works-window {
+  /* Posicionamento relativo ao topo/esquerda em vez de calc(50%) */
+  top: 30%; 
+  left: 20%;
+  transform: none; /* Garante que o react-draggable assuma o controle sem conflitos */
 }

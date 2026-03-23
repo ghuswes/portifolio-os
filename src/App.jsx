@@ -3,13 +3,13 @@ import Window from './components/Window'
 import DesktopIcon from './components/DesktopIcon'
 import AboutMe from './components/content/AboutMe'
 import Social from './components/content/Social'
+import Works from './components/content/Works'
 import ThemeToggle from './components/ThemeToggle'
 import BackgroundToggle from './components/BackgroundToggle'
-
 import HelpToggle from './components/HelpToggle'
 
 function App() {
-  // ... (estados inalterados)
+  // --- ESTADOS DAS JANELAS ---
   const [isHomeOpen, setIsHomeOpen] = useState(true);
   const [isHomeMinimized, setIsHomeMinimized] = useState(false);
 
@@ -19,6 +19,10 @@ function App() {
   const [isSocialOpen, setIsSocialOpen] = useState(false);
   const [isSocialMinimized, setIsSocialMinimized] = useState(false);
 
+  const [isWorksOpen, setIsWorksOpen] = useState(false);
+  const [isWorksMinimized, setIsWorksMinimized] = useState(false);
+
+  // --- CONTROLE DE FOCO ---
   const [activeWindow, setActiveWindow] = useState('home');
   const [selectedIconId, setSelectedIconId] = useState(null);
 
@@ -26,6 +30,7 @@ function App() {
   const handleDeselectAll = () => setSelectedIconId(null);
   const handleIconSelect = (id) => setSelectedIconId(id);
 
+  // --- TEMA E FUNDO ---
   const [theme, setTheme] = useState('light');
   const [bgType, setBgType] = useState('gif');
 
@@ -37,6 +42,7 @@ function App() {
     setBgType((prev) => (prev === 'static' ? 'gif' : 'static'));
   };
 
+  // --- LÓGICA DE AÇÕES DOS ÍCONES ---
   const handleIconAction = (id) => {
     switch (id) {
       case 'about':
@@ -49,6 +55,12 @@ function App() {
         setIsSocialOpen(true);
         setIsSocialMinimized(false);
         focusWindow('social');
+        break;
+
+      case 'work':
+        setIsWorksOpen(true);
+        setIsWorksMinimized(false);
+        focusWindow('work');
         break;
 
       case 'github':
@@ -64,8 +76,8 @@ function App() {
         break;
 
       case 'discord':
-      window.open('https://discord.com/users/411625986979790858', '_blank');
-      break;
+        window.open('https://discord.com/users/411625986979790858', '_blank');
+        break;
 
       default:
         alert(`Funcionalidade para ${id} em breve!`);
@@ -100,7 +112,6 @@ function App() {
         </button>
       )}
 
-
       {/* --- JANELA 1: HOME --- */}
       <Window 
         isOpen={isHomeOpen}
@@ -108,7 +119,7 @@ function App() {
         onClose={() => setIsHomeOpen(false)}
         onMinimize={() => setIsHomeMinimized(true)}
         title="Home"
-        zIndex={activeWindow === 'home' ? 2 : 1}
+        zIndex={activeWindow === 'home' ? 3 : 1}
         onFocus={() => focusWindow('home')}
       >
          <div className="home-content" 
@@ -143,7 +154,7 @@ function App() {
         onMinimize={() => setIsAboutMinimized(true)}
         title="Sobre Mim"
         className="about-window"
-        zIndex={activeWindow === 'about' ? 2 : 1}
+        zIndex={activeWindow === 'about' ? 3 : 1}
         onFocus={() => focusWindow('about')}
       >
         <AboutMe />
@@ -157,7 +168,7 @@ function App() {
         onMinimize={() => setIsSocialMinimized(true)}
         title="Social"
         className="social-window" 
-        zIndex={activeWindow === 'social' ? 2 : 1}
+        zIndex={activeWindow === 'social' ? 3 : 1}
         onFocus={() => focusWindow('social')}
       >
         <Social 
@@ -165,6 +176,20 @@ function App() {
           onSelect={handleIconSelect}
           onDoubleClick={handleIconAction}
         />
+      </Window>
+
+      {/* --- JANELA 4: TRABALHOS --- */}
+      <Window 
+        isOpen={isWorksOpen}
+        isMinimized={isWorksMinimized}
+        onClose={() => setIsWorksOpen(false)}
+        onMinimize={() => setIsWorksMinimized(true)}
+        title="Trabalhos"
+        className="works-window"
+        zIndex={activeWindow === 'work' ? 3 : 1}
+        onFocus={() => focusWindow('work')}
+      >
+        <Works />
       </Window>
       
       {/* --- BARRA DE TAREFAS (DOCK) --- */}
@@ -181,13 +206,15 @@ function App() {
         {isSocialMinimized && (
           <DockItem label="Social" onClick={() => { setIsSocialMinimized(false); focusWindow('social'); }} />
         )}
+        {isWorksMinimized && (
+          <DockItem label="Trabalhos" onClick={() => { setIsWorksMinimized(false); focusWindow('work'); }} />
+        )}
       </div>
 
     </div>
   )
 }
 
-// Componente simples da Dock
 const DockItem = ({ label, onClick }) => (
   <div 
     onClick={(e) => { e.stopPropagation(); onClick(); }}
