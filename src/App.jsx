@@ -6,20 +6,19 @@ import Social from './components/content/Social'
 import ThemeToggle from './components/ThemeToggle'
 import BackgroundToggle from './components/BackgroundToggle'
 
+import HelpToggle from './components/HelpToggle'
+
 function App() {
-  // --- ESTADOS DA JANELA HOME ---
+  // ... (estados inalterados)
   const [isHomeOpen, setIsHomeOpen] = useState(true);
   const [isHomeMinimized, setIsHomeMinimized] = useState(false);
 
-  // --- ESTADOS DA JANELA SOBRE MIM ---
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAboutMinimized, setIsAboutMinimized] = useState(false);
 
-  // --- ESTADOS DA JANELA SOCIAL ---
   const [isSocialOpen, setIsSocialOpen] = useState(false);
   const [isSocialMinimized, setIsSocialMinimized] = useState(false);
 
-  // --- CONTROLE DE FOCO ---
   const [activeWindow, setActiveWindow] = useState('home');
   const [selectedIconId, setSelectedIconId] = useState(null);
 
@@ -27,26 +26,19 @@ function App() {
   const handleDeselectAll = () => setSelectedIconId(null);
   const handleIconSelect = (id) => setSelectedIconId(id);
 
-  // --- TEMA ---
-  const [theme, setTheme] = useState('light'); // Começa no claro
+  const [theme, setTheme] = useState('light');
+  const [bgType, setBgType] = useState('gif');
 
-  // --- TIPO DE FUNDO ---
-  const [bgType, setBgType] = useState('gif'); // 'static' ou 'gif'
-
-  // Função para trocar
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-  // --- TROCAR FUNDO ---
   const toggleBg = () => {
     setBgType((prev) => (prev === 'static' ? 'gif' : 'static'));
   };
 
-  // --- LÓGICA DO DUPLO CLIQUE ---
   const handleIconAction = (id) => {
     switch (id) {
-      // Abrir Janelas Internas
       case 'about':
         setIsAboutOpen(true);
         setIsAboutMinimized(false);
@@ -59,7 +51,6 @@ function App() {
         focusWindow('social');
         break;
 
-      // Links Externos
       case 'github':
         window.open('https://github.com/ghuswes/', '_blank');
         break;
@@ -91,21 +82,24 @@ function App() {
   return (
     <div className="desktop" onClick={handleDeselectAll} data-theme={theme} data-bg={bgType}>
       
-      {/* --- BOTÃO DE TEMA --- */}
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-
-      {/* BOTÃO FUNDO (GIF/Static) */}
-      <BackgroundToggle bgType={bgType} toggleBg={toggleBg} />
+      {/* --- BOTÕES DE CONTROLE --- */}
+      <div className="controls-container">
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+        <BackgroundToggle bgType={bgType} toggleBg={toggleBg} />
+        <HelpToggle message={<>Use <b>clique-duplo</b> para interagir com os ícones!</>} />
+      </div>
 
       {/* Botão de segurança da Home */}
       {!isHomeOpen && (
         <button 
           onClick={(e) => { e.stopPropagation(); setIsHomeOpen(true); focusWindow('home'); }} 
-          style={{position: 'absolute', top: 140, left: 20, zIndex: 1000}}
+          className="control-btn"
+          style={{position: 'absolute', top: '22rem', left: '1.5rem', zIndex: 1000, background: 'white', borderRadius: '8px', border: '2px solid #000'}}
         >
-          Abrir Home
+          🏠
         </button>
       )}
+
 
       {/* --- JANELA 1: HOME --- */}
       <Window 

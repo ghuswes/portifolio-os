@@ -50,9 +50,9 @@ const AboutMe = () => {
           <h3>Meus interesses pessoais</h3>
           <ul>
             <li>Games, de JRPG a jogos de Puzzle</li>
-            <li>Leio mangás, vejo alguns animes (principalmente os que são obras de arte visuais)</li>
+            <li>De vez em quando leio mangás e assisto animes</li>
             <li>Gosto de desenhar</li>
-            <li>Gosto de TCGs em geral, MTG, Pokémon, YGO e FaB</li>
+            <li>Gosto de muitos TCGs, como: MTG, Pokémon, YGO e FaB</li>
           </ul>
         </div>
 
@@ -63,7 +63,7 @@ const AboutMe = () => {
             <li>Carinho pela franquia Mother</li>
             <li>Pixelart é meu ponto fraco</li>
             <li>Amo trilhas sonoras de games</li>
-            <li>Gênero Western Futurista e fantasia são os meus favoritos</li>
+            <li>Gênero Western Futurista e Fantasia são os meus favoritos</li>
             <li>Gosto muito de animes de comédia</li>
             <li>Eu tento ser um cara maneiro (Soul - Soul Eater)</li>
           </ul>
