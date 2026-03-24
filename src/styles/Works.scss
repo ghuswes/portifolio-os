@@ -6,6 +6,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0;
+  padding-bottom: 80px; /* Garante que a barra de scroll nunca seja enorme */
   display: flex;
   flex-direction: column;
 
@@ -249,10 +250,29 @@
     }
   }
 
-  /* --- SCROLLBAR CUSTOMIZADA (MESMA DO ABOUT ME) --- */
-  &::-webkit-scrollbar { width: calc(var(--border-size) * 0.25); background-color: transparent; }
-  &::-webkit-scrollbar-track { background-image: url('/portifolio-os/assets/scroll-track.png'); background-size: 100% 100%; background-repeat: repeat-y; }
-  &::-webkit-scrollbar-thumb { background-image: url('/portifolio-os/assets/scroll-thumb.png'); background-size: 100% 100%; background-repeat: no-repeat; min-height: 10%; }
+  /* --- SCROLLBAR CUSTOMIZADA --- */
+  &::-webkit-scrollbar { 
+    width: calc(var(--border-size) * 0.25); 
+    background-color: transparent; 
+  }
+
+  /* TRILHO */
+  &::-webkit-scrollbar-track { 
+    background-image: url('/portifolio-os/assets/scroll-track.png'); 
+    background-size: 100% 100%; 
+    background-repeat: repeat-y; 
+  }
+
+  /* THUMB (A BARRA) */
+  &::-webkit-scrollbar-thumb { 
+    border-style: solid;
+    border-image-source: url('/portifolio-os/assets/scroll-thumb.png');
+    border-image-slice: 15 fill; 
+    border-image-repeat: stretch; 
+    
+    min-height: 60px; 
+    image-rendering: pixelated;
+  }
   &::-webkit-scrollbar-button { display: block; height: 5%; width: 5%; background-size: 100% 100%; background-repeat: no-repeat; }
   &::-webkit-scrollbar-button:single-button:vertical:decrement { background-image: url('/portifolio-os/assets/scroll-up.png'); }
   &::-webkit-scrollbar-button:single-button:vertical:decrement:active { background-image: url('/portifolio-os/assets/scroll-up-pressed.png'); }
