@@ -97,13 +97,13 @@
 
   /* THUMB (A BARRA) */
   &::-webkit-scrollbar-thumb { 
-    background-image: url('/portifolio-os/assets/scroll-thumb.png');
-    background-size: 100% 100%; 
-    background-repeat: no-repeat;
-    border: none;
+    border-style: solid;
+    border-image-source: url('/portifolio-os/assets/scroll-thumb.png');
+    border-image-slice: 15 fill;
+    border-image-repeat: stretch;
     
-    /* Altura mínima também pode ser relativa */
-    min-height: 10%;
+    min-height: 60px;
+    image-rendering: pixelated;
   }
 
   /* BOTÕES */

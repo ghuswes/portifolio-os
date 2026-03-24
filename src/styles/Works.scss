@@ -1,0 +1,282 @@
+/* src/styles/Works.scss */
+
+.works-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  padding-bottom: 80px; /* Garante que a barra de scroll nunca seja enorme */
+  display: flex;
+  flex-direction: column;
+
+  /* --- SEÇÃO COLAPSÁVEL --- */
+  .collapsible-section {
+    width: 100%;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+
+    .section-header {
+      width: 100%;
+      background-color: var(--header-highlight);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: rgba(var(--header-highlight), 0.8);
+      }
+
+      h3 {
+        font-size: 2.5rem;
+        margin: 0;
+        color: var(--text-primary);
+        flex: 1;
+        position: relative;
+        padding-bottom: 5px;
+        
+        /* Sublinhado fino e simples */
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 95%; /* Quase até o fim do texto */
+          height: 3px;
+          background-color: var(--text-primary);
+          opacity: 0.6;
+        }
+      }
+
+      .toggle-btn {
+        width: 40px;
+        height: 40px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        image-rendering: pixelated;
+        flex-shrink: 0;
+
+        &.collapsed {
+          background-image: url('/portifolio-os/assets/scroll-down.png');
+          &:active {
+            background-image: url('/portifolio-os/assets/scroll-down-pressed.png');
+          }
+        }
+
+        &.expanded {
+          background-image: url('/portifolio-os/assets/scroll-up.png');
+          &:active {
+            background-image: url('/portifolio-os/assets/scroll-up-pressed.png');
+          }
+        }
+      }
+    }
+
+    .section-content {
+      padding: 2rem;
+      background-color: var(--window-bg);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+
+  /* --- FERRAMENTAS --- */
+  .tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+
+    .tool-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      width: 8rem;
+
+      .tool-icon {
+        width: 8rem;
+        height: 8rem;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        image-rendering: pixelated;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      span {
+        font-family: var(--font-body);
+        font-size: 1.4rem;
+        text-align: center;
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  /* --- GALERIA DE ILUSTRAÇÕES --- */
+  .illustrations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+    gap: 1.5rem;
+
+    .illustration-card {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: 3px solid var(--text-primary);
+      overflow: hidden;
+      background-color: #eee;
+      position: relative;
+      cursor: pointer; /* Indica que é clicável */
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        image-rendering: pixelated;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover img {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  /* --- MODAL DE IMAGEM --- */
+  .image-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001; /* Acima de tudo */
+    cursor: zoom-out;
+    padding: 2rem;
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      background-color: var(--window-bg);
+      border: 4px solid var(--text-primary);
+      box-shadow: 8px 8px 0px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+
+      img {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        image-rendering: pixelated;
+        display: block;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 40px;
+        height: 40px;
+        background-color: var(--accent-color);
+        border: 3px solid var(--text-primary);
+        color: #000;
+        font-family: var(--font-title);
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:hover { transform: scale(1.1); }
+      }
+
+      .modal-info {
+        padding: 1rem;
+        font-family: var(--font-body);
+        font-size: 1.4rem;
+        color: #fff; /* Fonte em branco */
+        text-align: center;
+        border-top: 1px solid rgba(255,255,255,0.2);
+      }
+    }
+  }
+
+  /* --- PROJETOS --- */
+  .project-item {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 2px dashed var(--text-secondary);
+
+    .project-image {
+      width: 20rem;
+      height: 12rem;
+      background-color: #ddd;
+      flex-shrink: 0;
+      border: 2px solid var(--text-primary);
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h4 { font-size: 2rem; color: var(--text-primary); }
+      p { font-size: 1.6rem; color: var(--text-secondary); line-height: 1.3; }
+    }
+  }
+
+  /* --- SCROLLBAR CUSTOMIZADA --- */
+  &::-webkit-scrollbar { 
+    width: calc(var(--border-size) * 0.25); 
+    background-color: transparent; 
+  }
+
+  /* TRILHO */
+  &::-webkit-scrollbar-track { 
+    background-image: url('/portifolio-os/assets/scroll-track.png'); 
+    background-size: 100% 100%; 
+    background-repeat: repeat-y; 
+  }
+
+  /* THUMB (A BARRA) */
+  &::-webkit-scrollbar-thumb { 
+    border-style: solid;
+    border-image-source: url('/portifolio-os/assets/scroll-thumb.png');
+    border-image-slice: 15 fill; 
+    border-image-repeat: stretch; 
+    
+    min-height: 60px; 
+    image-rendering: pixelated;
+  }
+  &::-webkit-scrollbar-button { display: block; height: 5%; width: 5%; background-size: 100% 100%; background-repeat: no-repeat; }
+  &::-webkit-scrollbar-button:single-button:vertical:decrement { background-image: url('/portifolio-os/assets/scroll-up.png'); }
+  &::-webkit-scrollbar-button:single-button:vertical:decrement:active { background-image: url('/portifolio-os/assets/scroll-up-pressed.png'); }
+  &::-webkit-scrollbar-button:single-button:vertical:increment { background-image: url('/portifolio-os/assets/scroll-down.png'); }
+  &::-webkit-scrollbar-button:single-button:vertical:increment:active { background-image: url('/portifolio-os/assets/scroll-down-pressed.png'); }
+  &::-webkit-scrollbar-button:vertical:start:increment, &::-webkit-scrollbar-button:vertical:end:decrement { display: none; }
+}

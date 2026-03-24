@@ -105,41 +105,48 @@ button, .control-btn {
   position: relative;
 }
 
+/* --- ANIMAÇÃO DE FUNDO SUAVE --- */
+@keyframes diagonalScroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 500px 500px; 
+  }
+}
+
 .desktop {
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
   
-  /* Cor de fundo base (transição suave da cor) */
   background-color: var(--bg-color);
   transition: background-color 0.3s ease;
 
-  /* Configuração para a Imagem/GIF cobrir tudo */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url('/portifolio-os/assets/wallpaper.png');
+  background-size: 1500px;
+  background-repeat: repeat;
+  animation: diagonalScroll 8s linear infinite; /* mais tempo, mais devagar */
+  
+  image-rendering: pixelated;
 }
 
-/* --- A MATRIZ DE 4 ESTADOS DE FUNDO --- */
-
-/* 1. CLARO + GIF (Padrão) */
-.desktop {
-  background-image: url('/portifolio-os/assets/wallpaper.gif');
-}
-
-/* 2. CLARO + ESTÁTICO */
+/* 2. CLARO + ESTÁTICO (Desativa a animação) */
 .desktop[data-bg='static'] {
+  animation: none;
   background-image: url('/portifolio-os/assets/wallpaper.png');
 }
 
-/* 3. ESCURO + GIF */
+/* 3. ESCURO + ANIMADO (Troca para a imagem escura mas mantém animação) */
 .desktop[data-theme='dark'] {
-  background-image: url('/portifolio-os/assets/wallpaper-dark.gif');
+  background-image: url('/portifolio-os/assets/wallpaper-dark.png');
+  animation: diagonalScroll 8s linear infinite;
 }
 
-/* 4. ESCURO + ESTÁTICO */
+/* 4. ESCURO + ESTÁTICO (Troca imagem e remove animação) */
 .desktop[data-theme='dark'][data-bg='static'] {
+  animation: none;
   background-image: url('/portifolio-os/assets/wallpaper-dark.png');
 }
 
