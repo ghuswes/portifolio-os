@@ -9,7 +9,7 @@ const CollapsibleSection = ({ title, children, defaultOpen = true }) => {
     <div className="collapsible-section">
       <div className="section-header" onClick={() => setIsOpen(!isOpen)}>
         <h3>{title}</h3>
-        <span className={`arrow ${isOpen ? 'open' : ''}`}>▼</span>
+        <div className={`toggle-btn ${isOpen ? 'expanded' : 'collapsed'}`}></div>
       </div>
       {isOpen && (
         <div className="section-content">
@@ -32,7 +32,7 @@ const ImageModal = ({ image, onClose }) => {
         left: 0,
         width: '100vw',
         height: '100vh',
-        backgroundColor: 'rgba(0,0,0,0.7)', // Fundo um pouco mais visível
+        backgroundColor: 'rgba(0,0,0,0.7)',
         zIndex: 999999,
         display: 'flex',
         alignItems: 'center',
@@ -49,7 +49,7 @@ const ImageModal = ({ image, onClose }) => {
           boxShadow: 'none',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center', // Centraliza a imagem e o texto
+          alignItems: 'center',
           gap: '1.5rem'
         }}
       >
@@ -94,8 +94,8 @@ const Works = () => {
   const illustrations = [
     { id: 1, src: '/portifolio-os/assets/grumpycat.png', title: 'Arte comissionada, inspirada no "Grumpy Cat"' }, 
     { id: 2, src: '/portifolio-os/assets/punhusky.png', title: 'Arte comissionada, inspirada no "Pun Husky"' },
-    { id: 3, src: '/portifolio-os/assets/floresta.png', title: 'Arte Alterada para "Floresta Básica" (MTG) ' },
-    { id: 4, src: '/portifolio-os/assets/pantano.png', title: 'Arte Alterada para "Pântano Básico" (MTG)' },
+    { id: 3, src: '/portifolio-os/assets/floresta.png', title: 'Arte alterada para "Floresta Básica" (MTG)' },
+    { id: 4, src: '/portifolio-os/assets/pantano.png', title: 'Arte alterada para "Pântano Básico" (MTG)' },
   ];
 
   return (

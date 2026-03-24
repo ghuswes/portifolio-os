@@ -178,7 +178,6 @@
 
 /* --- Estilo Específico da Janela Trabalhos --- */
 .os-window.works-window {
-  /* Posicionamento relativo ao topo/esquerda em vez de calc(50%) */
   top: 30%; 
   left: 20%;
   transform: none; /* Garante que o react-draggable assuma o controle sem conflitos */
