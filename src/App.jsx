@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Window from './components/Window'
 import DesktopIcon from './components/DesktopIcon'
+import Dock from './components/Dock'
 import AboutMe from './components/content/AboutMe'
 import Social from './components/content/Social'
 import Works from './components/content/Works'
@@ -10,23 +11,58 @@ import HelpToggle from './components/HelpToggle'
 
 function App() {
   // --- ESTADOS DAS JANELAS ---
-  const [isHomeOpen, setIsHomeOpen] = useState(true);
-  const [isHomeMinimized, setIsHomeMinimized] = useState(false);
-
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
-  const [isAboutMinimized, setIsAboutMinimized] = useState(false);
-
-  const [isSocialOpen, setIsSocialOpen] = useState(false);
-  const [isSocialMinimized, setIsSocialMinimized] = useState(false);
-
-  const [isWorksOpen, setIsWorksOpen] = useState(false);
-  const [isWorksMinimized, setIsWorksMinimized] = useState(false);
+  const [windows, setWindows] = useState({
+    home: { id: 'home', label: 'Home', isOpen: true, isMinimized: false, zIndex: 3 },
+    about: { id: 'about', label: 'Sobre Mim', isOpen: false, isMinimized: false, zIndex: 1 },
+    social: { id: 'social', label: 'Social', isOpen: false, isMinimized: false, zIndex: 1 },
+    work: { id: 'work', label: 'Trabalhos', isOpen: false, isMinimized: false, zIndex: 1 },
+  });
 
   // --- CONTROLE DE FOCO ---
   const [activeWindow, setActiveWindow] = useState('home');
   const [selectedIconId, setSelectedIconId] = useState(null);
 
-  const focusWindow = (windowId) => setActiveWindow(windowId);
+  const focusWindow = (id) => {
+    setActiveWindow(id);
+    setWindows(prev => {
+      const newState = { ...prev };
+      Object.keys(newState).forEach(key => {
+        newState[key] = { ...newState[key], zIndex: key === id ? 10 : 1 };
+      });
+      return newState;
+    });
+  };
+
+  const openWindow = (id) => {
+    setWindows(prev => ({
+      ...prev,
+      [id]: { ...prev[id], isOpen: true, isMinimized: false }
+    }));
+    focusWindow(id);
+  };
+
+  const closeWindow = (id) => {
+    setWindows(prev => ({
+      ...prev,
+      [id]: { ...prev[id], isOpen: false, isMinimized: false }
+    }));
+  };
+
+  const minimizeWindow = (id) => {
+    setWindows(prev => ({
+      ...prev,
+      [id]: { ...prev[id], isMinimized: true }
+    }));
+  };
+
+  const restoreWindow = (id) => {
+    setWindows(prev => ({
+      ...prev,
+      [id]: { ...prev[id], isMinimized: false }
+    }));
+    focusWindow(id);
+  };
+
   const handleDeselectAll = () => setSelectedIconId(null);
   const handleIconSelect = (id) => setSelectedIconId(id);
 
@@ -44,43 +80,41 @@ function App() {
 
   // --- LÓGICA DE AÇÕES DOS ÍCONES ---
   const handleIconAction = (id) => {
-    switch (id) {
-      case 'about':
-        setIsAboutOpen(true);
-        setIsAboutMinimized(false);
-        focusWindow('about');
-        break;
-      
-      case 'social':
-        setIsSocialOpen(true);
-        setIsSocialMinimized(false);
-        focusWindow('social');
-        break;
+    if (windows[id]) {
+      openWindow(id);
+    } else {
+      switch (id) {
+        case 'github':
+          window.open('https://github.com/ghuswes/', '_blank');
+          break;
+        case 'instagram':
+          window.open('https://instagram.com/ghus_wes/', '_blank');
+          break;
+        case 'linkedin':
+          window.open('https://linkedin.com/in/ghuswes/', '_blank');
+          break;
+        case 'discord':
+          window.open('https://discord.com/users/411625986979790858', '_blank');
+          break;
+        default:
+          alert(`Funcionalidade para ${id} em breve!`);
+      }
+    }
+  };
 
-      case 'work':
-        setIsWorksOpen(true);
-        setIsWorksMinimized(false);
-        focusWindow('work');
-        break;
+  // Ícones da Dock: Home (sempre) + janelas abertas ou minimizadas
+  const dockItems = useMemo(() => {
+    return Object.values(windows).filter(win => win.id === 'home' || win.isOpen || win.isMinimized);
+  }, [windows]);
 
-      case 'github':
-        window.open('https://github.com/ghuswes/', '_blank');
-        break;
-      
-      case 'instagram':
-        window.open('https://instagram.com/ghus_wes/', '_blank');
-        break;
-
-      case 'linkedin':
-        window.open('https://linkedin.com/in/ghuswes/', '_blank');
-        break;
-
-      case 'discord':
-        window.open('https://discord.com/users/411625986979790858', '_blank');
-        break;
-
-      default:
-        alert(`Funcionalidade para ${id} em breve!`);
+  const handleDockIconClick = (id) => {
+    const win = windows[id];
+    if (!win.isOpen) {
+      openWindow(id);
+    } else if (win.isMinimized) {
+      restoreWindow(id);
+    } else {
+      focusWindow(id);
     }
   };
 
@@ -98,28 +132,17 @@ function App() {
       <div className="controls-container">
         <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         <BackgroundToggle bgType={bgType} toggleBg={toggleBg} />
-        <HelpToggle message={<>Use <b>clique-duplo</b> para interagir com os ícones!</>} />
+        <HelpToggle message={<>Use <b>clique-duplo</b> para os ícones e <b>clique simples</b> na barra!</>} />
       </div>
-
-      {/* Botão de segurança da Home */}
-      {!isHomeOpen && (
-        <button 
-          onClick={(e) => { e.stopPropagation(); setIsHomeOpen(true); focusWindow('home'); }} 
-          className="control-btn"
-          style={{position: 'absolute', top: '22rem', left: '1.5rem', zIndex: 1000, background: 'white', borderRadius: '8px', border: '2px solid #000'}}
-        >
-          🏠
-        </button>
-      )}
 
       {/* --- JANELA 1: HOME --- */}
       <Window 
-        isOpen={isHomeOpen}
-        isMinimized={isHomeMinimized}
-        onClose={() => setIsHomeOpen(false)}
-        onMinimize={() => setIsHomeMinimized(true)}
+        isOpen={windows.home.isOpen}
+        isMinimized={windows.home.isMinimized}
+        onClose={() => closeWindow('home')}
+        onMinimize={() => minimizeWindow('home')}
         title="Home"
-        zIndex={activeWindow === 'home' ? 3 : 1}
+        zIndex={windows.home.zIndex}
         onFocus={() => focusWindow('home')}
       >
          <div className="home-content" 
@@ -148,13 +171,13 @@ function App() {
 
       {/* --- JANELA 2: SOBRE MIM --- */}
       <Window 
-        isOpen={isAboutOpen}
-        isMinimized={isAboutMinimized}
-        onClose={() => setIsAboutOpen(false)}
-        onMinimize={() => setIsAboutMinimized(true)}
+        isOpen={windows.about.isOpen}
+        isMinimized={windows.about.isMinimized}
+        onClose={() => closeWindow('about')}
+        onMinimize={() => minimizeWindow('about')}
         title="Sobre Mim"
         className="about-window"
-        zIndex={activeWindow === 'about' ? 3 : 1}
+        zIndex={windows.about.zIndex}
         onFocus={() => focusWindow('about')}
       >
         <AboutMe />
@@ -162,13 +185,13 @@ function App() {
 
       {/* --- JANELA 3: SOCIAL --- */}
       <Window 
-        isOpen={isSocialOpen}
-        isMinimized={isSocialMinimized}
-        onClose={() => setIsSocialOpen(false)}
-        onMinimize={() => setIsSocialMinimized(true)}
+        isOpen={windows.social.isOpen}
+        isMinimized={windows.social.isMinimized}
+        onClose={() => closeWindow('social')}
+        onMinimize={() => minimizeWindow('social')}
         title="Social"
         className="social-window" 
-        zIndex={activeWindow === 'social' ? 3 : 1}
+        zIndex={windows.social.zIndex}
         onFocus={() => focusWindow('social')}
       >
         <Social 
@@ -180,52 +203,26 @@ function App() {
 
       {/* --- JANELA 4: TRABALHOS --- */}
       <Window 
-        isOpen={isWorksOpen}
-        isMinimized={isWorksMinimized}
-        onClose={() => setIsWorksOpen(false)}
-        onMinimize={() => setIsWorksMinimized(true)}
+        isOpen={windows.work.isOpen}
+        isMinimized={windows.work.isMinimized}
+        onClose={() => closeWindow('work')}
+        onMinimize={() => minimizeWindow('work')}
         title="Trabalhos"
         className="works-window"
-        zIndex={activeWindow === 'work' ? 3 : 1}
+        zIndex={windows.work.zIndex}
         onFocus={() => focusWindow('work')}
       >
         <Works />
       </Window>
       
       {/* --- BARRA DE TAREFAS (DOCK) --- */}
-      <div style={{
-        position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', gap: '15px', zIndex: 1000
-      }}>
-        {isHomeMinimized && (
-          <DockItem label="Home" onClick={() => { setIsHomeMinimized(false); focusWindow('home'); }} />
-        )}
-        {isAboutMinimized && (
-          <DockItem label="Sobre Mim" onClick={() => { setIsAboutMinimized(false); focusWindow('about'); }} />
-        )}
-        {isSocialMinimized && (
-          <DockItem label="Social" onClick={() => { setIsSocialMinimized(false); focusWindow('social'); }} />
-        )}
-        {isWorksMinimized && (
-          <DockItem label="Trabalhos" onClick={() => { setIsWorksMinimized(false); focusWindow('work'); }} />
-        )}
-      </div>
+      <Dock 
+        windows={dockItems} 
+        onIconClick={handleDockIconClick} 
+      />
 
     </div>
   )
 }
-
-const DockItem = ({ label, onClick }) => (
-  <div 
-    onClick={(e) => { e.stopPropagation(); onClick(); }}
-    style={{
-      background: 'white', padding: '10px 20px', borderRadius: 10, cursor: 'pointer',
-      boxShadow: '0 5px 15px rgba(0,0,0,0.1)', fontWeight: 'bold', fontSize: '0.9rem',
-      display: 'flex', alignItems: 'center', gap: '5px', border: '2px solid #4a4a4a'
-    }}
-  >
-    📂 {label}
-  </div>
-);
 
 export default App
