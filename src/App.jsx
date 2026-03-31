@@ -156,7 +156,7 @@ function App() {
             </h1>
             <p style={{ color: 'var(--text-secondary, #888)', fontSize: '3rem' }}>ilustrador e desenvolvedor</p>
           </div>
-          <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '60px', justifyContent: 'center', flexWrap: 'wrap' }}>
             {menuItems.map((item) => (
               <DesktopIcon 
                 key={item.id} id={item.id} label={item.label}

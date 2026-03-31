@@ -22,7 +22,7 @@ const AboutMe = () => {
           <h3>Eae, Meu nome é Gustavo! Essas são algumas coisas que eu faço no meu ramo:</h3>
           <ul>
             <li>Desenvolvimento, principalmente Python e C++, mas já trabalhei com Lua e Golang</li>
-            <li>Frontend, porém iniciante</li>
+            <li>Entusiasta de frontend</li>
             <li>Faço pesquisa em problemas de otimização</li>
             <li>Também faço desenhos sob demanda!</li>
           </ul>
