@@ -1,0 +1,54 @@
+/* src/styles/Dock.scss */
+
+.dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--taskbar-height);
+  
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+  
+  /* Estilo clássico cinza (Win95/98) */
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff; /* Efeito de borda 3D */
+  box-shadow: inset 1px 1px 0px #dfdfdf, 0px -1px 0px #808080;
+  
+  z-index: 2000;
+}
+
+.dock-item {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s;
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  .icon-graphic {
+    width: 7rem;
+    height: 7rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* Indicador simplificado */
+  .indicator {
+    position: absolute;
+    bottom: -0.3rem;
+    width: 2rem;
+    height: 0.25rem;
+    background-color: #000080; /* Azul clássico */
+    box-shadow: none;
+  }
+}
