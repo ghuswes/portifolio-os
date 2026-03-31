@@ -2,21 +2,21 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Executa o deploy sempre que houver push na branch main
-
-  # Permite rodar o workflow manualmente pela aba Actions
+    branches: ["main"]
   workflow_dispatch:
 
-# Define as permissões necessárias para o GITHUB_TOKEN
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Garante que apenas um deploy aconteça por vez
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
+# Resolve o aviso de depreciação definindo esta variável globalmente
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   deploy:
@@ -31,11 +31,12 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22 # Usando a versão 22 (LTS atual) para maior estabilidade
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        # O --force com o --legacy-peer-deps ignora bloqueios de conflito
+        run: npm install --force --legacy-peer-deps
 
       - name: Build
         run: npm run build
@@ -46,7 +47,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Pasta onde o build foi gerado
+          # Verifique se sua pasta de build é 'dist' (Vite) ou 'build' (CRA)
+          path: './dist' 
 
       - name: Deploy to GitHub Pages
         id: deployment
