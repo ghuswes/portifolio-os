@@ -39,16 +39,16 @@
   }
 
   &.collapsed .sidebar-arrow-btn {
-    background-image: url('/portifolio-os/assets/scroll-down.png');
+    background-image: url('/portifolio-os/assets/btn-right.png');
     &:active {
-      background-image: url('/portifolio-os/assets/scroll-down-pressed.png');
+      background-image: url('/portifolio-os/assets/btn-right-pressed.png');
     }
   }
 
   &.open .sidebar-arrow-btn {
-    background-image: url('/portifolio-os/assets/scroll-up.png');
+    background-image: url('/portifolio-os/assets/btn-left.png');
     &:active {
-      background-image: url('/portifolio-os/assets/scroll-up-pressed.png');
+      background-image: url('/portifolio-os/assets/btn-left-pressed.png');
     }
   }
 
