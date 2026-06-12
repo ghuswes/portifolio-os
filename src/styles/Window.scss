@@ -164,7 +164,7 @@
 
 /* Sobrescreve a posição apenas para a janela Sobre Mim */
 .os-window.about-window {
-  top: 30%; /* Mais pra cima (Home é 50%) */
+  top: 25%; /* Mais pra cima (Home é 50%) */
   left: 10%; /* Mais pra esquerda (Home é 50%) */
 }
 
@@ -178,7 +178,16 @@
 
 /* --- Estilo Específico da Janela Trabalhos --- */
 .os-window.works-window {
-  top: 30%; 
+  top: 25%; 
   left: 20%;
+  transform: none; /* Garante que o react-draggable assuma o controle sem conflitos */
+}
+
+/* --- Estilo Específico da Janela Contato --- */
+.os-window.contact-window {
+  width: 750px;
+  height: 500px;
+  top: 25%; /* Altere aqui para mudar a posição vertical onde a tela aparece */
+  left: 45%; /* Altere aqui para mudar a posição horizontal onde a tela aparece */
   transform: none; /* Garante que o react-draggable assuma o controle sem conflitos */
 }

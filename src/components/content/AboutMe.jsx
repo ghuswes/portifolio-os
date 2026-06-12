@@ -19,11 +19,11 @@ const AboutMe = () => {
       <div className="about-body">
         
         <div className="topic-section">
-          <h3>Eae, Meu nome é Gustavo! Essas são algumas coisas que eu faço no meu ramo:</h3>
+          <h3>Eae, Meu nome é Gustavo! Isto é um pouquinho do que faço no meu ramo:</h3>
           <ul>
             <li>Desenvolvimento, principalmente Python e C++, mas já trabalhei com Lua e Golang</li>
             <li>Entusiasta de frontend</li>
-            <li>Faço pesquisa em problemas de otimização</li>
+            <li>Pesquisa em problemas de otimização</li>
             <li>Também faço desenhos sob demanda!</li>
           </ul>
         </div>
@@ -42,7 +42,7 @@ const AboutMe = () => {
             <li>Eu sei inglês bem</li>
             <li>Comecei o básico de japonês, mas bem pouquinho</li>
             <li>Tenho experiência em suporte técnico, validação de conformidade e documentação de projetos</li>
-            <li>Eu faço desenhos pixelart</li>
+            <li>Tenho experiência em desenvolvimento de sistemas</li>
           </ul>
         </div>
 
@@ -51,21 +51,9 @@ const AboutMe = () => {
           <ul>
             <li>Games, de JRPG a jogos de Puzzle</li>
             <li>De vez em quando leio mangás e assisto animes</li>
-            <li>Gosto de desenhar</li>
+            <li>Gosto de desenhar, principalmente pixelart</li>
+            <li>Curto muito trilhas sonoras de jogos</li>
             <li>Gosto de muitos TCGs, como: MTG, Pokémon, YGO e FaB</li>
-          </ul>
-        </div>
-
-        <div className="topic-section">
-          <h3>Extra</h3>
-          <ul>
-            <li>Jogo favorito: Chrono Cross</li>
-            <li>Carinho pela franquia Mother</li>
-            <li>Pixelart é meu ponto fraco</li>
-            <li>Amo trilhas sonoras de games</li>
-            <li>Gênero Western Futurista e Fantasia são os meus favoritos</li>
-            <li>Gosto muito de animes de comédia</li>
-            <li>Eu tento ser um cara maneiro (Soul - Soul Eater)</li>
           </ul>
         </div>
 
