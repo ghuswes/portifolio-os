@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 import '../styles/Window.scss';
 
@@ -14,6 +14,21 @@ const Window = ({
   className
 }) => {
   const nodeRef = useRef(null);
+  const [pressedButton, setPressedButton] = useState(null);
+
+  const handleControlAction = (e, buttonType, action) => {
+    e.stopPropagation();
+    if (e.type === 'touchstart') {
+      e.preventDefault();
+    }
+    
+    setPressedButton(buttonType);
+
+    setTimeout(() => {
+      action();
+      setPressedButton(null);
+    }, 120); // Delay de 120ms para feedback visual do botão pressionado
+  };
 
   if (!isOpen || isMinimized) return null;
 
@@ -38,14 +53,18 @@ const Window = ({
           
           <div className="window-controls">
             <button 
-              className="control-btn minimize" 
-              onClick={(e) => { e.stopPropagation(); onMinimize(); }} // StopPropagation evita bugs
+              className={`control-btn minimize ${pressedButton === 'minimize' ? 'pressed' : ''}`} 
+              onClick={(e) => handleControlAction(e, 'minimize', onMinimize)}
+              onTouchStart={(e) => handleControlAction(e, 'minimize', onMinimize)}
+              onMouseDown={(e) => e.stopPropagation()} // Evita início de arraste com mouse
               aria-label="Minimizar"
             ></button>
             
             <button 
-              className="control-btn close" 
-              onClick={(e) => { e.stopPropagation(); onClose(); }} 
+              className={`control-btn close ${pressedButton === 'close' ? 'pressed' : ''}`} 
+              onClick={(e) => handleControlAction(e, 'close', onClose)}
+              onTouchStart={(e) => handleControlAction(e, 'close', onClose)}
+              onMouseDown={(e) => e.stopPropagation()} // Evita início de arraste com mouse
               aria-label="Fechar"
             ></button>
           </div>

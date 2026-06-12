@@ -80,3 +80,22 @@
 .icon-discord .icon-graphic {
   background-image: url('/portifolio-os/assets/discord.png');
 }
+
+/* --- RESPONSIVIDADE PARA TELAS ABAIXO DE 1024px (DENTRO DAS JANELAS) --- */
+@media (max-width: 1023px) {
+  .os-window {
+    .desktop-icon {
+      width: 6.5rem !important;
+      
+      .icon-graphic {
+        width: 5.5rem !important;
+        height: 5.5rem !important;
+      }
+
+      .icon-label {
+        font-size: 1.6rem !important;
+        transform: translateY(-5px) !important;
+      }
+    }
+  }
+}

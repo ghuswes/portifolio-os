@@ -70,7 +70,7 @@
     .topic-section li {
       margin-bottom: 1%; 
       position: relative; 
-      padding-left: 2%;
+      padding-left: 1rem;
       color: var(--text-secondary);
       &:before { 
         content: "*"; 
@@ -136,5 +136,35 @@
   &::-webkit-scrollbar-button:vertical:start:increment,
   &::-webkit-scrollbar-button:vertical:end:decrement {
     display: none;
+  }
+}
+
+/* --- RESPONSIVIDADE PARA TELAS ABAIXO DE 768px --- */
+@media (max-width: 767px) {
+  .about-container {
+    .about-header {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      gap: 2rem !important;
+      padding: 6% 3% !important;
+
+      .profile-photo {
+        width: 15rem !important;
+        height: 15rem !important;
+      }
+
+      .header-text {
+        align-items: center !important;
+        text-align: center !important;
+        h2 {
+          font-size: 3rem !important;
+        }
+        span {
+          font-size: 2.2rem !important;
+          margin-top: 1rem !important;
+        }
+      }
+    }
   }
 }
