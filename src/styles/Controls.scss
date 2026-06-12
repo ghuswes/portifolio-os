@@ -65,3 +65,37 @@
     word-wrap: break-word;
   }
 }
+
+/* --- RESPONSIVIDADE PARA TELAS ABAIXO DE 1024px --- */
+@media (max-width: 1023px) {
+  .controls-container {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row; /* Alinhamento horizontal */
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: var(--taskbar-height);
+    margin: 0;
+    padding: 0 1.5rem;
+    gap: 1.2rem; /* Gap reduzido entre os botões */
+    z-index: 9999; /* Acima da barra de tarefas (z-index 2000) */
+  }
+
+  .control-btn {
+    width: 5.5rem;  /* Tamanho reduzido do botão de controle */
+    height: 5.5rem; /* Tamanho reduzido do botão de controle */
+  }
+
+  .speech-bubble {
+    left: 50%;
+    top: auto;
+    bottom: 5.5rem; /* Posiciona o balão acima do botão menor */
+    transform: translateX(-50%);
+    background-image: url('/portifolio-os/assets/speech-bubble-mobile.png'); /* Caminho reservado para o balão de fala mobile */
+    padding: 15px 20px 25px 20px; /* Padding adaptado para o bico do balão virado para baixo */
+  }
+}

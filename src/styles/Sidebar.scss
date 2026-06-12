@@ -1,0 +1,120 @@
+/* src/styles/Sidebar.scss */
+
+.sidebar {
+  position: fixed;
+  top: -0.5rem;
+  left: -0.5rem;
+  width: 6rem; /* Largura da barra mantida */
+  height: calc(105vh - var(--taskbar-height));
+  z-index: 1900; /* Acima do plano de fundo, mas abaixo das janelas ativas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background: transparent; /* O container principal agora é invisível e fixo */
+  pointer-events: none; /* Cliques passam direto nas partes vazias */
+
+  .sidebar-arrow-btn {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza o botão horizontalmente na aba */
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+    outline: none;
+    z-index: 1910; /* Fica acima da barra que desliza */
+    pointer-events: auto; /* Permite clique no botão */
+
+    &:active {
+      transform: translateX(-50%) translateY(1px); /* Feedback físico mantendo alinhamento */
+    }
+  }
+
+  &.collapsed .sidebar-arrow-btn {
+    background-image: url('/portifolio-os/assets/scroll-down.png');
+    &:active {
+      background-image: url('/portifolio-os/assets/scroll-down-pressed.png');
+    }
+  }
+
+  &.open .sidebar-arrow-btn {
+    background-image: url('/portifolio-os/assets/scroll-up.png');
+    &:active {
+      background-image: url('/portifolio-os/assets/scroll-up-pressed.png');
+    }
+  }
+
+  /* Gaveta cinza que desliza contendo apenas os ícones */
+  .sidebar-drawer {
+    position: absolute;
+    top: 0;
+    left: 0.2rem;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(192, 192, 192, 0.9); /* Cinza clássico semi-transparente */
+    border-right: 2px solid #ffffff;
+    box-shadow: inset 1px 1px 0px #dfdfdf, 2px 0px 5px rgba(0, 0, 0, 0.2);
+    padding-top: 6rem; /* Margem superior para os ícones começarem abaixo do botão fixo */
+    box-sizing: border-box;
+    pointer-events: auto; /* Habilita cliques na gaveta cinza */
+    
+    /* Transição suave do slide horizontal */
+    transition: transform 0.4s ease-in-out;
+  }
+
+  &.collapsed .sidebar-drawer {
+    transform: translateX(-100%); /* Desliza apenas a barra cinza e os ícones para fora */
+  }
+
+  &.open .sidebar-drawer {
+    transform: translateX(0); /* Desliza de volta para dentro */
+  }
+
+  .sidebar-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Gap reduzido entre os ícones */
+    width: 100%;
+    align-items: center;
+
+    /* Estilização compacta dos ícones para a barra lateral */
+    .desktop-icon {
+      width: 6rem;
+      position: relative; /* Para guiar o posicionamento absoluto do indicador */
+      transition: transform 0.1s ease-in-out; /* Transição para animação suave */
+
+      &:active {
+        transform: scale(0.9); /* Sensação de clique: encolhe ao pressionar */
+      }
+      
+      .icon-graphic {
+        width: 5rem;
+        height: 5rem;
+      }
+
+      .icon-label {
+        display: none !important; /* Esconde os nomes dos ícones */
+      }
+
+      /* Barra azul indicadora de janela aberta (igual à dock) */
+      .indicator {
+        position: absolute;
+        bottom: -0.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2rem;
+        height: 0.25rem;
+        background-color: #000080; /* Azul clássico */
+        box-shadow: none;
+      }
+    }
+  }
+}

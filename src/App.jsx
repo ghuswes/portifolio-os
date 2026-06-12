@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Window from './components/Window'
 import DesktopIcon from './components/DesktopIcon'
 import Dock from './components/Dock'
@@ -9,6 +9,7 @@ import Contact from './components/content/Contact'
 import ThemeToggle from './components/ThemeToggle'
 import BackgroundToggle from './components/BackgroundToggle'
 import HelpToggle from './components/HelpToggle'
+import './styles/Sidebar.scss'
 
 function App() {
   // --- ESTADOS DAS JANELAS ---
@@ -71,6 +72,16 @@ function App() {
   // --- TEMA E FUNDO ---
   const [theme, setTheme] = useState('light');
   const [bgType, setBgType] = useState('gif');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -83,7 +94,29 @@ function App() {
   // --- LÓGICA DE AÇÕES DOS ÍCONES ---
   const handleIconAction = (id) => {
     if (windows[id]) {
-      openWindow(id);
+      if (isMobile) {
+        // Se a janela clicada já estiver aberta, fecha ela (volta para o desktop)
+        if (windows[id].isOpen) {
+          closeWindow(id);
+        } else {
+          // Se for outra janela, fecha as demais e abre a nova
+          setWindows(prev => {
+            const newState = { ...prev };
+            Object.keys(newState).forEach(key => {
+              if (key !== id) {
+                newState[key] = { ...newState[key], isOpen: false };
+              } else {
+                newState[key] = { ...newState[key], isOpen: true, isMinimized: false };
+              }
+            });
+            return newState;
+          });
+          focusWindow(id);
+        }
+      } else {
+        // Comportamento normal de desktop (permite múltiplas janelas abertas)
+        openWindow(id);
+      }
     } else {
       switch (id) {
         case 'github':
@@ -130,46 +163,98 @@ function App() {
   return (
     <div className="desktop" onClick={handleDeselectAll} data-theme={theme} data-bg={bgType}>
       
-      {/* --- BOTÕES DE CONTROLE --- */}
       <div className="controls-container">
         <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         <BackgroundToggle bgType={bgType} toggleBg={toggleBg} />
-        <HelpToggle message={<>Use <b>clique-duplo</b> para os ícones e <b>clique simples</b> na barra!</>} />
+        <HelpToggle message={isMobile ? "Recomendado acessar pelo desktop." : <>Use <b>clique-duplo</b> para os ícones e <b>clique simples</b> na barra!</>} />
       </div>
 
-      {/* --- JANELA 1: HOME --- */}
-      <Window 
-        isOpen={windows.home.isOpen}
-        isMinimized={windows.home.isMinimized}
-        onClose={() => closeWindow('home')}
-        onMinimize={() => minimizeWindow('home')}
-        title="Home"
-        zIndex={windows.home.zIndex}
-        onFocus={() => focusWindow('home')}
-      >
-         <div className="home-content" 
-          style={{ 
-            display: 'flex', flexDirection: 'column', alignItems: 'center', 
-            width: '100%', padding: '20px',
-          }}>
-          <div style={{ marginBottom: 40, textAlign: 'center', pointerEvents: 'none' }}>
-            <h1 style={{ fontSize: '5rem', marginBottom: '0.5rem', marginTop: '2rem', color: 'var(--text-primary)' }}>
-              Oi! <span style={{ color: 'var(--accent-color)' }}>Gustavo</span> aqui
-            </h1>
-            <p style={{ color: 'var(--text-secondary, #888)', fontSize: '3rem' }}>ilustrador e desenvolvedor</p>
-          </div>
-          <div style={{ display: 'flex', gap: '60px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            {menuItems.map((item) => (
+      {/* --- ABA LATERAL (APENAS MOBILE) --- */}
+      {isMobile && (
+        <div className={`sidebar ${sidebarOpen ? 'open' : 'collapsed'}`}>
+          <button 
+            className="sidebar-arrow-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSidebarOpen(!sidebarOpen);
+            }}
+            aria-label={sidebarOpen ? "Fechar Menu" : "Abrir Menu"}
+          />
+          
+          <div className="sidebar-drawer">
+            <div className="sidebar-icons">
               <DesktopIcon 
-                key={item.id} id={item.id} label={item.label}
-                isSelected={selectedIconId === item.id}
+                id="about" 
+                label="Sobre mim" 
+                isSelected={selectedIconId === 'about'}
                 onSelect={handleIconSelect}
                 onDoubleClick={handleIconAction}
+                isOpen={windows.about.isOpen}
               />
-            ))}
+              <DesktopIcon 
+                id="work" 
+                label="Trabalhos" 
+                isSelected={selectedIconId === 'work'}
+                onSelect={handleIconSelect}
+                onDoubleClick={handleIconAction}
+                isOpen={windows.work.isOpen}
+              />
+              <DesktopIcon 
+                id="social" 
+                label="Social" 
+                isSelected={selectedIconId === 'social'}
+                onSelect={handleIconSelect}
+                onDoubleClick={handleIconAction}
+                isOpen={windows.social.isOpen}
+              />
+              <DesktopIcon 
+                id="contact" 
+                label="Contato" 
+                isSelected={selectedIconId === 'contact'}
+                onSelect={handleIconSelect}
+                onDoubleClick={handleIconAction}
+                isOpen={windows.contact.isOpen}
+              />
+            </div>
           </div>
         </div>
-      </Window>
+      )}
+
+      {/* --- JANELA 1: HOME (APENAS DESKTOP) --- */}
+      {!isMobile && (
+        <Window 
+          isOpen={windows.home.isOpen}
+          isMinimized={windows.home.isMinimized}
+          onClose={() => closeWindow('home')}
+          onMinimize={() => minimizeWindow('home')}
+          title="Home"
+          zIndex={windows.home.zIndex}
+          onFocus={() => focusWindow('home')}
+        >
+           <div className="home-content" 
+            style={{ 
+              display: 'flex', flexDirection: 'column', alignItems: 'center', 
+              width: '100%', padding: '20px',
+            }}>
+            <div style={{ marginBottom: 40, textAlign: 'center', pointerEvents: 'none' }}>
+              <h1 style={{ fontSize: '5rem', marginBottom: '0.5rem', marginTop: '2rem', color: 'var(--text-primary)' }}>
+                Oi! <span style={{ color: 'var(--accent-color)' }}>Gustavo</span> aqui
+              </h1>
+              <p style={{ color: 'var(--text-secondary, #888)', fontSize: '3rem' }}>ilustrador e desenvolvedor</p>
+            </div>
+            <div style={{ display: 'flex', gap: '60px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {menuItems.map((item) => (
+                <DesktopIcon 
+                  key={item.id} id={item.id} label={item.label}
+                  isSelected={selectedIconId === item.id}
+                  onSelect={handleIconSelect}
+                  onDoubleClick={handleIconAction}
+                />
+              ))}
+            </div>
+          </div>
+        </Window>
+      )}
 
       {/* --- JANELA 2: SOBRE MIM --- */}
       <Window 

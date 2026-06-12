@@ -43,3 +43,31 @@
     }
   }
 }
+
+/* --- RESPONSIVIDADE PARA TELAS ABAIXO DE 1024px --- */
+@media (max-width: 1023px) {
+  .contact-container {
+    flex-direction: column-reverse; /* Foto embaixo, texto em cima */
+    justify-content: center;
+    align-items: center;
+    padding: 20rem 2rem 2rem 2rem;
+
+    .contact-portrait {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      width: 16rem; /* Reduz para caber confortavelmente em telas móveis */
+      height: auto;
+      margin-top: 1rem;
+    }
+
+    .contact-text-container {
+      width: 100%;
+      text-align: center;
+    }
+
+    .contact-text {
+      font-size: 2.2rem;
+    }
+  }
+}

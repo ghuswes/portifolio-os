@@ -52,3 +52,14 @@
     box-shadow: none;
   }
 }
+
+/* --- RESPONSIVIDADE PARA TELAS ABAIXO DE 1024px --- */
+@media (max-width: 1023px) {
+  .dock {
+    justify-content: center;
+    
+    .dock-item {
+      display: none !important; /* Esconde os botões de janelas para liberar espaço pros controles fixados */
+    }
+  }
+}
