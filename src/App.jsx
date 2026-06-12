@@ -5,6 +5,7 @@ import Dock from './components/Dock'
 import AboutMe from './components/content/AboutMe'
 import Social from './components/content/Social'
 import Works from './components/content/Works'
+import Contact from './components/content/Contact'
 import ThemeToggle from './components/ThemeToggle'
 import BackgroundToggle from './components/BackgroundToggle'
 import HelpToggle from './components/HelpToggle'
@@ -16,6 +17,7 @@ function App() {
     about: { id: 'about', label: 'Sobre Mim', isOpen: false, isMinimized: false, zIndex: 1 },
     social: { id: 'social', label: 'Social', isOpen: false, isMinimized: false, zIndex: 1 },
     work: { id: 'work', label: 'Trabalhos', isOpen: false, isMinimized: false, zIndex: 1 },
+    contact: { id: 'contact', label: 'Contato', isOpen: false, isMinimized: false, zIndex: 1 },
   });
 
   // --- CONTROLE DE FOCO ---
@@ -213,6 +215,20 @@ function App() {
         onFocus={() => focusWindow('work')}
       >
         <Works />
+      </Window>
+
+      {/* --- JANELA 5: CONTATO --- */}
+      <Window 
+        isOpen={windows.contact.isOpen}
+        isMinimized={windows.contact.isMinimized}
+        onClose={() => closeWindow('contact')}
+        onMinimize={() => minimizeWindow('contact')}
+        title="Contato"
+        className="contact-window"
+        zIndex={windows.contact.zIndex}
+        onFocus={() => focusWindow('contact')}
+      >
+        <Contact />
       </Window>
       
       {/* --- BARRA DE TAREFAS (DOCK) --- */}

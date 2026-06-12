@@ -1,0 +1,45 @@
+/* src/styles/Contact.scss */
+
+.contact-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Empurra o texto para a direita */
+  padding: 4rem;
+  box-sizing: border-box;
+
+  .contact-portrait {
+    position: absolute;
+    bottom: -40px;
+    left: -2px;
+    width: 20rem; /* Ajuste adequado para ver bem o pixel art do email */
+    height: auto;
+    image-rendering: pixelated;
+    pointer-events: none;
+  }
+
+  .contact-text-container {
+    width: 60%; /* Ocupa o centro-direito da janela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-text {
+    font-family: var(--font-body); /* Utiliza a fonte regular GhusWrite-Regular.otf */
+    font-size: 3.2rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+
+    .contact-email {
+      font-family: var(--font-body); /* Utiliza a fonte regular GhusWrite-Regular.otf */
+      color: var(--text-link);
+      font-weight: normal;
+      word-break: break-all;
+    }
+  }
+}

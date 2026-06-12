@@ -22,7 +22,7 @@
     transition: background-color 0.3s ease;
     
     /* Padding INTERNO */
-    padding: 10% 5%; 
+    padding: 3% 3%; 
     
     display: flex;
     gap: 5%;
@@ -32,7 +32,7 @@
     flex-shrink: 0;
 
     .profile-photo {
-      width: 15rem; height: 15rem;
+      width: 18rem; height: 18rem;
       border: 3px solid var(--photo-border);
       background-color: var(--window-bg); 
       background-size: cover;
